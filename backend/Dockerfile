@@ -1,27 +1,34 @@
 # GroceryGO scraping API.
 #
-# Uses the official Playwright image, which bundles Chromium, every system
-# library it needs, plus xvfb + fonts. We need HEADED Chrome — Carrefour and Noon
-# reject headless browsers at the Akamai layer — so the container:
-#   1. installs the real Google Chrome build (`playwright install chrome`), and
-#   2. starts the server under a virtual framebuffer with `xvfb-run`.
-FROM mcr.microsoft.com/playwright:v1.47.2-jammy
+# Slim Node base + just Chromium (not the full Playwright image, which bundles
+# Firefox + WebKit and is ~2 GB). We need Chromium running HEADED — Carrefour and
+# Noon reject headless browsers at the Akamai layer — so the container runs it
+# under a virtual framebuffer with `xvfb-run`. Headed *bundled* Chromium gets
+# through; it does not need to be Google Chrome.
+FROM node:20-bookworm-slim
 
 ENV NODE_ENV=production \
     HEADLESS=0 \
-    BROWSER_CHANNEL=chrome \
-    PORT=3001
+    BROWSER_CHANNEL=chromium \
+    PORT=3001 \
+    PLAYWRIGHT_BROWSERS_PATH=/ms-playwright
 
 WORKDIR /app
 
 COPY package*.json ./
-# Deps only; the base image already has Chromium so skip the postinstall.
+
+# 1) node deps (skip the postinstall browser download — we do it explicitly)
+# 2) Chromium + all its system libraries, via Playwright's --with-deps
+# 3) xvfb so Chromium can run "headed" with no real display
 RUN npm ci --omit=dev --ignore-scripts \
- && npx playwright install chrome
+ && npx playwright install --with-deps chromium \
+ && apt-get update \
+ && apt-get install -y --no-install-recommends xvfb \
+ && apt-get clean \
+ && rm -rf /var/lib/apt/lists/*
 
 COPY . .
 
 EXPOSE 3001
 
-# xvfb-run gives Chrome a display so it runs "headed" inside a headless container.
 CMD ["xvfb-run", "--auto-servernum", "--server-args=-screen 0 1366x900x24", "node", "src/server.js"]

@@ -17,7 +17,7 @@ services:
       - key: HEADLESS
         value: "0" # must stay headed — Carrefour/Noon block headless
       - key: BROWSER_CHANNEL
-        value: chrome
+        value: chromium
       - key: SCRAPER_CONCURRENCY
         value: "2" # free tier is ~0.5 CPU / 512 MB — keep this low
       - key: CACHE_TTL_MS
