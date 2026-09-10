@@ -30,7 +30,8 @@ launches with `xvfb-run … node src/server.js`.
 ## Free-tier hosting options
 
 ### Render (recommended — simplest Docker path)
-- `render.yaml` blueprint is included. New → Blueprint → pick this repo.
+- A `render.yaml` blueprint is included **at the repo root** (Render only looks
+  there). New → Blueprint → pick this repo → Apply.
 - Free web service: 512 MB RAM, spins down after ~15 min idle (first request
   after a spin-down takes ~30–60 s while Chrome cold-starts).
 - Docker builds are supported on free tier.

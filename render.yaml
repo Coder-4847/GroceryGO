@@ -1,0 +1,28 @@
+# Render blueprint. Must live at the repo ROOT (Render only looks here).
+# In the Render dashboard: New > Blueprint, point it at this repo.
+services:
+  - type: web
+    name: grocerygo-api
+    runtime: docker
+    # Paths are relative to the repo root. The backend is self-contained in ./backend.
+    dockerfilePath: ./backend/Dockerfile
+    dockerContext: ./backend
+    plan: free
+    region: frankfurt # closest free region to the UAE
+    healthCheckPath: /health
+    autoDeploy: true
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: HEADLESS
+        value: "0" # must stay headed — Carrefour/Noon block headless
+      - key: BROWSER_CHANNEL
+        value: chrome
+      - key: SCRAPER_CONCURRENCY
+        value: "2" # free tier is ~0.5 CPU / 512 MB — keep this low
+      - key: CACHE_TTL_MS
+        value: "1800000" # 30 min
+      - key: CORS_ORIGINS
+        # Optional: any https://*.github.io origin is already allowed by default.
+        # Set this only for a custom domain. `sync: false` = edit it in the dashboard.
+        sync: false
