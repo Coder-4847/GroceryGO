@@ -111,6 +111,13 @@ export async function getBrowser() {
       })
       .then((b) => {
         log.info(`browser ready in ${Date.now() - started}ms`);
+        // If the browser dies (e.g. OOM-killed on a small instance), drop the
+        // cached handle so the next request relaunches instead of erroring forever.
+        b.on('disconnected', () => {
+          log.warn('browser disconnected — will relaunch on next request');
+          if (browserPromise) browserPromise = null;
+          contextsServed = 0;
+        });
         return b;
       })
       .catch(async (err) => {
