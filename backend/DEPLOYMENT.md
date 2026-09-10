@@ -1,20 +1,22 @@
 # Deploying the GroceryGO backend
 
-The backend runs a real (headed) Chrome via Playwright. **Carrefour and Noon
-block headless browsers at the Akamai layer**, so you can't just run it headless
-on a server — it must run under a virtual display (`xvfb`). The included
-`Dockerfile` handles this for you.
+The backend drives Chromium via Playwright. **Carrefour and Noon block *headless*
+browsers at the Akamai layer**, so it must run **headed**, under a virtual
+display (`xvfb`) on a server. The included `Dockerfile` handles this. (Headed
+bundled Chromium is enough — it does not need to be Google Chrome.)
 
 ## What the backend needs
 
 - Node 20+
-- Google Chrome + Playwright system libs
-- `xvfb` (virtual framebuffer) so Chrome can run "headed" in a headless container
-- ~512 MB RAM minimum; 1 GB is comfortable (Chrome is the memory hog)
+- Chromium + its system libraries (`playwright install --with-deps chromium`)
+- `xvfb` (virtual framebuffer) so Chromium can run "headed" in a headless container
+- ~512 MB RAM minimum; 1 GB is comfortable (the browser is the memory hog)
 - Outbound HTTPS to the four retailer domains
 
-The `Dockerfile` starts from `mcr.microsoft.com/playwright`, installs Chrome, and
-launches with `xvfb-run … node src/server.js`.
+The `Dockerfile` starts from `node:20-bookworm-slim`, adds Chromium + xvfb, and
+launches with `xvfb-run … node src/server.js`. (The full
+`mcr.microsoft.com/playwright` image also works but is ~2 GB and stalls small
+free-tier builders.)
 
 ## Environment variables
 
@@ -22,8 +24,8 @@ launches with `xvfb-run … node src/server.js`.
 | -------------------- | -------------------------------------------- | ----- |
 | `CORS_ORIGINS`       | `https://<user>.github.io`                   | Your Pages origin. `*.github.io` is already allowed by default, so this is optional. |
 | `HEADLESS`           | `0`                                          | Must stay headed. |
-| `BROWSER_CHANNEL`    | `chrome`                                     | Real Chrome beats bundled Chromium against bot detection. |
-| `SCRAPER_CONCURRENCY`| `2` on tiny instances, `4` otherwise         | Each retailer = one Chrome tab. |
+| `BROWSER_CHANNEL`    | `chromium`                                   | `chromium` = Playwright's bundled build (what the Docker image installs). Use `chrome` only if you've installed Google Chrome in the image. |
+| `SCRAPER_CONCURRENCY`| `2` on tiny instances, `4` otherwise         | Each retailer = one browser tab. |
 | `CACHE_TTL_MS`       | `1800000` (30 min)                           | Longer = fewer scrapes = friendlier + faster. |
 | `PORT`               | set by the host automatically                | |
 
@@ -33,10 +35,11 @@ launches with `xvfb-run … node src/server.js`.
 - A `render.yaml` blueprint is included **at the repo root** (Render only looks
   there). New → Blueprint → pick this repo → Apply.
 - Free web service: 512 MB RAM, spins down after ~15 min idle (first request
-  after a spin-down takes ~30–60 s while Chrome cold-starts).
-- Docker builds are supported on free tier.
-- **Trade-off:** the 512 MB cap is tight with Chrome — keep `SCRAPER_CONCURRENCY=2`
-  and expect the occasional retailer to time out under load.
+  after a spin-down takes ~30–60 s while the browser cold-starts).
+- Docker builds are supported on free tier — keep the image small (this one is
+  ~700 MB; the full Playwright image is too big and the build stalls).
+- **Trade-off:** the 512 MB cap is tight with a browser — keep
+  `SCRAPER_CONCURRENCY=2` and expect the occasional retailer to time out under load.
 
 ### Railway
 - Detects the `Dockerfile` automatically. Set the root directory to `backend`.
