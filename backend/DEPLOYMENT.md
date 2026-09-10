@@ -31,6 +31,14 @@ free-tier builders.)
 
 ## Free-tier hosting options
 
+> **Reality check:** a headed browser wants ~1 GB RAM and real CPU. The 512 MB /
+> shared-CPU free tiers below (Render, Railway, Koyeb…) technically run it but
+> searches are slow (~60–90 s) and can crash under load. For a genuinely free
+> setup that performs, use **Oracle Cloud Always Free** — see
+> [`../deploy/oracle/README.md`](../deploy/oracle/README.md). The options below
+> are fine for a demo.
+
+
 ### Render (recommended — simplest Docker path)
 - A `render.yaml` blueprint is included **at the repo root** (Render only looks
   there). New → Blueprint → pick this repo → Apply.

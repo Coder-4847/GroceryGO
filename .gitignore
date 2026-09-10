@@ -12,3 +12,6 @@ playwright-report/
 test-results/
 .cache/
 scraper-debug/
+
+# Oracle deploy secrets
+deploy/oracle/.env

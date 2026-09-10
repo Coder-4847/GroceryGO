@@ -157,14 +157,17 @@ Built in this order (see commit history):
 
 ## Deployment
 
-Config and step-by-step guides are in place:
+- **Frontend** → GitHub Pages, via [`.github/workflows/deploy-frontend.yml`](.github/workflows/deploy-frontend.yml).
+  See [frontend/DEPLOYMENT.md](frontend/DEPLOYMENT.md).
+- **Backend** → needs a real host (it runs a browser). Guides:
+  - [deploy/oracle/README.md](deploy/oracle/README.md) — **Oracle Cloud Always
+    Free** (recommended: genuinely free, enough resources, ~15–30 s searches).
+  - [backend/DEPLOYMENT.md](backend/DEPLOYMENT.md) — Render / Railway / Fly, with
+    the `Dockerfile` and `render.yaml`. Small free tiers work but searches are
+    slow (~60–90 s).
 
-- [frontend/DEPLOYMENT.md](frontend/DEPLOYMENT.md) — GitHub Pages via the included
-  Actions workflow.
-- [backend/DEPLOYMENT.md](backend/DEPLOYMENT.md) — Docker image + Render / Railway
-  / Fly.io free-tier comparison and trade-offs.
-
-Nothing is deployed yet — that's the last step, once local testing is signed off.
+Set the frontend's `API_BASE` repo variable to the backend URL and re-run the
+Pages workflow.
 
 ---
 

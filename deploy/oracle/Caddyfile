@@ -1,0 +1,16 @@
+{
+	# Uncomment to get cert-expiry emails from Let's Encrypt:
+	# email {$ACME_EMAIL}
+}
+
+{$DOMAIN} {
+	encode gzip
+	reverse_proxy api:3001
+
+	# Small hardening headers.
+	header {
+		-Server
+		Referrer-Policy "no-referrer"
+		X-Content-Type-Options "nosniff"
+	}
+}

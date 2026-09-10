@@ -1,0 +1,50 @@
+# GroceryGO on an Oracle Cloud "Always Free" VM.
+#
+#   api   — the scraping backend (built from ../../backend/Dockerfile)
+#   caddy — reverse proxy that terminates HTTPS with an auto-renewing
+#           Let's Encrypt certificate for your DuckDNS domain
+#
+# Usage (after ./setup.sh and editing .env):
+#   docker compose up -d --build
+#   docker compose logs -f
+
+services:
+  api:
+    build:
+      context: ../../backend
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    environment:
+      NODE_ENV: production
+      HEADLESS: "0"
+      BROWSER_CHANNEL: chromium
+      # A real VM can handle all four scrapers at once.
+      SCRAPER_CONCURRENCY: "4"
+      SCRAPER_TIMEOUT_MS: "25000"
+      CACHE_TTL_MS: "1800000"
+      # Any *.github.io origin is allowed by default; add a custom one here.
+      CORS_ORIGINS: ${CORS_ORIGINS:-}
+    expose:
+      - "3001"
+    # Chromium + Xvfb is memory-hungry; cap it so a runaway can't take the box down.
+    mem_limit: 1500m
+
+  caddy:
+    image: caddy:2-alpine
+    restart: unless-stopped
+    depends_on:
+      - api
+    ports:
+      - "80:80"
+      - "443:443"
+    environment:
+      DOMAIN: ${DOMAIN:?set DOMAIN in .env}
+      ACME_EMAIL: ${ACME_EMAIL:-}
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+
+volumes:
+  caddy_data:
+  caddy_config:
