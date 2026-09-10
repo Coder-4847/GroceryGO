@@ -16,12 +16,14 @@ export async function getBrowser() {
       ? config.browserChannel
       : undefined;
     log.info(
-      `launching browser (channel=${channel || 'bundled-chromium'} headless=${config.headless})`
+      `launching browser (channel=${channel || 'bundled-chromium'} headless=${config.headless} DISPLAY=${process.env.DISPLAY || '(unset)'})`
     );
+    const started = Date.now();
     browserPromise = chromium
       .launch({
         headless: config.headless,
         channel,
+        timeout: 60_000,
         args: [
           '--disable-blink-features=AutomationControlled',
           '--no-sandbox',
@@ -29,6 +31,10 @@ export async function getBrowser() {
           '--disable-gpu',
           '--start-maximized',
         ],
+      })
+      .then((b) => {
+        log.info(`browser ready in ${Date.now() - started}ms`);
+        return b;
       })
       .catch(async (err) => {
         browserPromise = null; // allow a later retry
@@ -38,6 +44,7 @@ export async function getBrowser() {
           config.browserChannel = 'chromium';
           return getBrowser();
         }
+        log.error(`browser launch failed after ${Date.now() - started}ms: ${err.message}`);
         throw err;
       });
   }
