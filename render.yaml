@@ -20,9 +20,11 @@ services:
       - key: BROWSER_CHANNEL
         value: chromium
       - key: SCRAPER_CONCURRENCY
-        value: "2" # free tier is ~0.5 CPU / 512 MB — keep this low
+        value: "1" # 512 MB only fits one headed browser tab at a time
       - key: SCRAPER_TIMEOUT_MS
         value: "40000" # room for a slow cold browser start on a tiny instance
+      - key: NODE_OPTIONS
+        value: "--max-old-space-size=192"
       - key: CACHE_TTL_MS
         value: "1800000" # 30 min
       - key: CORS_ORIGINS

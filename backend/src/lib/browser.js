@@ -8,6 +8,10 @@ const log = createLogger('browser');
 
 let browserPromise = null;
 let displayPromise = null;
+let contextsServed = 0;
+// Recycle the browser process periodically so leaked memory can't build up on a
+// small instance. 0 disables.
+const RECYCLE_AFTER = Number(process.env.BROWSER_RECYCLE_AFTER ?? 12);
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
@@ -91,6 +95,18 @@ export async function getBrowser() {
           '--disable-dev-shm-usage',
           '--disable-gpu',
           '--start-maximized',
+          // Keep the memory footprint small enough for a 512 MB instance.
+          '--renderer-process-limit=1',
+          '--js-flags=--max-old-space-size=128',
+          '--disable-extensions',
+          '--disable-background-networking',
+          '--disable-background-timer-throttling',
+          '--disable-renderer-backgrounding',
+          '--disable-back-forward-cache',
+          '--disable-features=TranslateUI',
+          '--no-first-run',
+          '--no-default-browser-check',
+          '--mute-audio',
         ],
       })
       .then((b) => {
@@ -118,7 +134,19 @@ export async function getBrowser() {
  * product thumbnails.
  */
 export async function newContext({ loadImages = false, noRoutes = false } = {}) {
+  if (RECYCLE_AFTER > 0 && contextsServed >= RECYCLE_AFTER && browserPromise) {
+    const b = await browserPromise.catch(() => null);
+    // only recycle when nothing else is using the browser right now
+    if (b && b.contexts().length === 0) {
+      log.info(`recycling browser after ${contextsServed} contexts`);
+      browserPromise = null;
+      contextsServed = 0;
+      await b.close().catch(() => {});
+    }
+  }
+
   const browser = await getBrowser();
+  contextsServed++;
   const context = await browser.newContext({
     userAgent: config.userAgent,
     locale: config.locale,
