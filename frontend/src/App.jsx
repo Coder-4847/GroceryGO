@@ -122,13 +122,25 @@ export default function App() {
 }
 
 function LoadingSkeleton({ query }) {
+  // The free-tier backend sleeps when idle; the first search after a while waits
+  // for it (and a browser) to spin up. Let the user know if it's taking a while.
+  const [slow, setSlow] = useState(false)
+  useEffect(() => {
+    const t = setTimeout(() => setSlow(true), 7000)
+    return () => clearTimeout(t)
+  }, [])
+
   return (
     <section className="results">
       <div className="results-summary">
         <h2>
           Searching <span className="results-query">“{query}”</span>…
         </h2>
-        <p className="results-lede">Checking Carrefour, Lulu, Noon and Amazon.ae.</p>
+        <p className="results-lede">
+          {slow
+            ? 'The backend may be waking up — the first search can take up to a minute.'
+            : 'Checking Carrefour, Lulu, Noon and Amazon.ae.'}
+        </p>
       </div>
       <div className="results-grid">
         {[0, 1, 2, 3].map((i) => (
