@@ -31,7 +31,7 @@ export async function scrapeLulu(query) {
 
       // Nudge lazy-loaded cards in.
       await page.evaluate(() => window.scrollBy(0, 1400)).catch(() => {});
-      await page.waitForTimeout(1200);
+      await page.waitForTimeout(500);
 
       const items = await page.$$eval(priceSel, (priceNodes) => {
         const seen = new Set();

@@ -33,19 +33,14 @@ export async function scrapeNoon(query) {
       if (outcome === 'empty') return { status: 'no_results', message: 'No matching products' };
       if (!outcome) throw new Error('search results did not render');
 
-      // Walk down the grid so lazy images + their alt text (which carries the
-      // brand) resolve for the cards we might pick, then return to the top.
-      await page.evaluate(async () => {
-        const step = Math.round(window.innerHeight * 0.9);
-        for (let y = 0; y < 3600; y += step) {
-          window.scrollTo(0, y);
-          await new Promise((r) => setTimeout(r, 250));
-        }
-        window.scrollTo(0, 0);
-      }).catch(() => {});
+      // A short scroll to trigger the first rows of lazy images/alt text. The
+      // per-pick second pass below fetches the chosen product's image if this
+      // didn't reach it — cheaper than scrolling the whole grid every time.
+      await page.evaluate(() => window.scrollTo(0, 1200)).catch(() => {});
       await page
-        .waitForSelector('a[href*="/p/"] img[src*="nooncdn.com/p/"]', { timeout: 3000 })
+        .waitForSelector('a[href*="/p/"] img[src*="nooncdn.com/p/"]', { timeout: 2500 })
         .catch(() => {});
+      await page.evaluate(() => window.scrollTo(0, 0)).catch(() => {});
 
       const items = await page.evaluate(() => {
         // JSON-LD ItemList: id -> name

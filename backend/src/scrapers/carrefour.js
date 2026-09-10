@@ -23,9 +23,13 @@ export async function scrapeCarrefour(query) {
     RETAILERS.carrefour,
     query,
     async ({ page, context, log }) => {
-      // Warm up: load an allowed page so Akamai sets its clearance cookies.
+      // Warm up: load an allowed page so Akamai sets its clearance cookie, then
+      // proceed the moment it appears (don't burn a fixed delay on a slow host).
       await page.goto(`${BASE}/mafuae/en/`, { waitUntil: 'domcontentloaded' });
-      await page.waitForTimeout(1500);
+      await page
+        .waitForFunction(() => document.cookie.includes('_abck'), { timeout: 10000 })
+        .catch(() => {});
+      await page.waitForTimeout(400);
 
       const vid = randomUUID().toUpperCase();
       const res = await context.request.post(API, {

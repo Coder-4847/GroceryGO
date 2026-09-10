@@ -45,7 +45,7 @@ export async function scrapeAmazon(query) {
       }
 
       await page.evaluate(() => window.scrollBy(0, 1600)).catch(() => {});
-      await page.waitForTimeout(900);
+      await page.waitForTimeout(500);
 
       const items = await page.$$eval(resultSel, (cards) => {
         const out = [];

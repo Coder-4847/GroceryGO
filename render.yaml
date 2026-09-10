@@ -20,9 +20,9 @@ services:
       - key: BROWSER_CHANNEL
         value: chromium
       - key: SCRAPER_CONCURRENCY
-        value: "1" # 512 MB only fits one headed browser tab at a time
+        value: "2" # 512 MB fits ~2 headed tabs with the memory flags in browser.js
       - key: SCRAPER_TIMEOUT_MS
-        value: "40000" # room for a slow cold browser start on a tiny instance
+        value: "40000" # room for a slow browser on a heavily throttled free CPU
       - key: NODE_OPTIONS
         value: "--max-old-space-size=192"
       - key: CACHE_TTL_MS
