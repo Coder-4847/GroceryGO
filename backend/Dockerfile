@@ -2,15 +2,15 @@
 #
 # Slim Node base + just Chromium (not the full Playwright image, which bundles
 # Firefox + WebKit and is ~2 GB). We need Chromium running HEADED — Carrefour and
-# Noon reject headless browsers at the Akamai layer — so the container runs it
-# under a virtual framebuffer with `xvfb-run`. Headed *bundled* Chromium gets
-# through; it does not need to be Google Chrome.
+# Noon reject headless browsers at the Akamai layer — so the container starts a
+# virtual X display (Xvfb) in the background before launching the server. Headed
+# *bundled* Chromium gets through; it does not need to be Google Chrome.
 FROM node:20-bookworm-slim
 
 ENV NODE_ENV=production \
     HEADLESS=0 \
     BROWSER_CHANNEL=chromium \
-    PORT=3001 \
+    DISPLAY=:99 \
     PLAYWRIGHT_BROWSERS_PATH=/ms-playwright
 
 WORKDIR /app
@@ -29,6 +29,7 @@ RUN npm ci --omit=dev --ignore-scripts \
 
 COPY . .
 
+# Render (and most PaaS) inject PORT at runtime; the app falls back to 3001.
 EXPOSE 3001
 
-CMD ["xvfb-run", "--auto-servernum", "--server-args=-screen 0 1366x900x24", "node", "src/server.js"]
+CMD ["sh", "docker-entrypoint.sh"]

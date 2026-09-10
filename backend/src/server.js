@@ -68,9 +68,16 @@ app.get('/search', searchLimiter, async (req, res) => {
 
 app.use((_req, res) => res.status(404).json({ error: 'Not found' }));
 
-const server = app.listen(config.port, () => {
-  log.info(`GroceryGO API listening on http://localhost:${config.port}`);
+// Bind 0.0.0.0 explicitly — PaaS platforms (Render, Railway, Fly) route to the
+// container by IP and won't see a localhost-only listener.
+const server = app.listen(config.port, '0.0.0.0', () => {
+  log.info(`GroceryGO API listening on 0.0.0.0:${config.port}`);
   log.info(`CORS origins: ${config.corsOrigins.join(', ')} (+ *.github.io)`);
+});
+
+server.on('error', (err) => {
+  log.error(`server failed to start: ${err.message}`);
+  process.exit(1);
 });
 
 async function shutdown(sig) {
