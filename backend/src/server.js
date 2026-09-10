@@ -8,7 +8,7 @@ import { createLogger } from './lib/logger.js';
 import { cache } from './lib/cache.js';
 import { search } from './search.js';
 import { RETAILER_LIST } from './scrapers/retailers.js';
-import { closeBrowser } from './lib/browser.js';
+import { closeBrowser, getBrowser } from './lib/browser.js';
 
 const log = createLogger('server');
 const app = express();
@@ -73,6 +73,12 @@ app.use((_req, res) => res.status(404).json({ error: 'Not found' }));
 const server = app.listen(config.port, '0.0.0.0', () => {
   log.info(`GroceryGO API listening on 0.0.0.0:${config.port}`);
   log.info(`CORS origins: ${config.corsOrigins.join(', ')} (+ *.github.io)`);
+
+  // Warm the browser (and start Xvfb) now, in the background, so the first real
+  // search doesn't pay the cold-start cost and time out.
+  getBrowser()
+    .then(() => log.info('browser pre-warmed'))
+    .catch((err) => log.warn(`browser pre-warm failed (will retry on first search): ${err.message}`));
 });
 
 server.on('error', (err) => {

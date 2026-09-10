@@ -1,10 +1,10 @@
 # GroceryGO scraping API.
 #
 # Slim Node base + just Chromium (not the full Playwright image, which bundles
-# Firefox + WebKit and is ~2 GB). We need Chromium running HEADED — Carrefour and
-# Noon reject headless browsers at the Akamai layer — so the container starts a
-# virtual X display (Xvfb) in the background before launching the server. Headed
-# *bundled* Chromium gets through; it does not need to be Google Chrome.
+# Firefox + WebKit and is ~2 GB). Chromium must run HEADED — Carrefour and Noon
+# reject headless browsers at the Akamai layer — so the app starts Xvfb itself
+# (see src/lib/browser.js) the first time it needs a browser. Headed *bundled*
+# Chromium gets through; it does not need to be Google Chrome.
 FROM node:20-bookworm-slim
 
 ENV NODE_ENV=production \
@@ -30,7 +30,6 @@ RUN npm ci --omit=dev --ignore-scripts \
 
 COPY . .
 
-# Render (and most PaaS) inject PORT at runtime; the app falls back to 3001.
 EXPOSE 3001
 
-CMD ["sh", "docker-entrypoint.sh"]
+CMD ["node", "src/server.js"]

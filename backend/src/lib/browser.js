@@ -1,3 +1,5 @@
+import fs from 'node:fs';
+import { spawn, spawnSync } from 'node:child_process';
 import { chromium } from 'playwright';
 import { config } from '../config.js';
 import { createLogger } from './logger.js';
@@ -5,6 +7,64 @@ import { createLogger } from './logger.js';
 const log = createLogger('browser');
 
 let browserPromise = null;
+let displayPromise = null;
+
+const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+
+/**
+ * A headed browser needs an X display. In a container there isn't one, so we
+ * start Xvfb ourselves the first time a browser is needed — this way it doesn't
+ * matter whether the platform runs our Docker CMD, its own start command, or
+ * `node src/server.js` directly.
+ */
+function ensureDisplay() {
+  if (displayPromise) return displayPromise;
+  displayPromise = (async () => {
+    if (config.headless || process.platform !== 'linux') return;
+
+    const display = process.env.DISPLAY || ':99';
+    const num = display.replace(/^:/, '').split('.')[0];
+    const socket = `/tmp/.X11-unix/X${num}`;
+
+    if (fs.existsSync(socket)) {
+      process.env.DISPLAY = display;
+      log.info(`using existing X display ${display}`);
+      return;
+    }
+
+    if (spawnSync('sh', ['-c', 'command -v Xvfb']).status !== 0) {
+      log.error('Xvfb is not installed — a headed browser cannot start. Install xvfb or set HEADLESS=1.');
+      return;
+    }
+
+    try {
+      fs.mkdirSync('/tmp/.X11-unix', { recursive: true });
+      fs.chmodSync('/tmp/.X11-unix', 0o1777);
+    } catch {
+      /* best effort */
+    }
+
+    log.info(`starting Xvfb on ${display}`);
+    const child = spawn(
+      'Xvfb',
+      [display, '-screen', '0', '1280x800x24', '-nolisten', 'tcp', '-ac', '-noreset'],
+      { stdio: 'ignore', detached: true }
+    );
+    child.on('error', (err) => log.error(`Xvfb spawn error: ${err.message}`));
+    child.unref();
+    process.env.DISPLAY = display;
+
+    for (let i = 0; i < 50; i++) {
+      if (fs.existsSync(socket)) {
+        log.info(`Xvfb ready on ${display} after ${i * 200}ms`);
+        return;
+      }
+      await sleep(200);
+    }
+    log.warn(`Xvfb socket ${socket} did not appear after 10s — launching anyway`);
+  })();
+  return displayPromise;
+}
 
 /**
  * Launch (once) and reuse a single Chromium instance. Each scrape gets its own
@@ -12,6 +72,7 @@ let browserPromise = null;
  */
 export async function getBrowser() {
   if (!browserPromise) {
+    await ensureDisplay();
     const channel = config.browserChannel && config.browserChannel !== 'chromium'
       ? config.browserChannel
       : undefined;

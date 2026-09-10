@@ -7,6 +7,7 @@ services:
     # Paths are relative to the repo root. The backend is self-contained in ./backend.
     dockerfilePath: ./backend/Dockerfile
     dockerContext: ./backend
+    dockerCommand: node src/server.js
     plan: free
     region: frankfurt # closest free region to the UAE
     healthCheckPath: /health
@@ -20,6 +21,8 @@ services:
         value: chromium
       - key: SCRAPER_CONCURRENCY
         value: "2" # free tier is ~0.5 CPU / 512 MB — keep this low
+      - key: SCRAPER_TIMEOUT_MS
+        value: "40000" # room for a slow cold browser start on a tiny instance
       - key: CACHE_TTL_MS
         value: "1800000" # 30 min
       - key: CORS_ORIGINS
