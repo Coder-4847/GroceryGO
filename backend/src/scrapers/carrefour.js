@@ -18,7 +18,7 @@ const API = `${BASE}/mafrp/api/v1/search/listing/keyword?latitude=${GEO.latitude
  * headed-Chrome browser context so it inherits the Akamai clearance cookies —
  * a bare fetch/curl to this host is rejected at the TLS/HTTP-2 layer.
  */
-export async function scrapeCarrefour(query) {
+export async function scrapeCarrefour(query, opts = {}) {
   return runBrowserScraper(
     RETAILERS.carrefour,
     query,
@@ -92,7 +92,7 @@ export async function scrapeCarrefour(query) {
 
       if (!candidates.length) return { status: 'no_results', message: 'No priced products found' };
 
-      const best = pickBestMatch(query, candidates);
+      const best = pickBestMatch(query, candidates, opts.constraints);
       if (!best) return { status: 'no_results', message: 'No matching products' };
       return { status: 'ok', product: makeProduct(best), matchCount: candidates.length };
     },

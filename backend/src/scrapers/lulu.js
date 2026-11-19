@@ -10,7 +10,7 @@ const searchUrl = (q) => `${BASE}/en-ae/list/?search_text=${encodeURIComponent(q
  * platform, behind Cloudflare. Products render as server components; each card is
  * an <a href="/en-ae/<slug>/p/<id>/"> with a <span data-testid="product-price">.
  */
-export async function scrapeLulu(query) {
+export async function scrapeLulu(query, opts = {}) {
   return runBrowserScraper(
     RETAILERS.lulu,
     query,
@@ -88,7 +88,7 @@ export async function scrapeLulu(query) {
         image: it.img,
       }));
 
-      const best = pickBestMatch(query, candidates);
+      const best = pickBestMatch(query, candidates, opts.constraints);
       if (!best) return { status: 'no_results', message: 'No priced products found' };
 
       return {

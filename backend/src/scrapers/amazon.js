@@ -17,7 +17,7 @@ const UNAVAILABLE_MSG = 'Amazon — unable to retrieve data';
  * CAPTCHA / "Continue shopping" interstitial instead, which we detect and treat
  * as unavailable.
  */
-export async function scrapeAmazon(query) {
+export async function scrapeAmazon(query, opts = {}) {
   return runBrowserScraper(
     RETAILERS.amazon,
     query,
@@ -81,7 +81,7 @@ export async function scrapeAmazon(query) {
         image: it.img,
       }));
 
-      const best = pickBestMatch(query, candidates);
+      const best = pickBestMatch(query, candidates, opts.constraints);
       if (!best) return { status: 'no_results', message: 'No matching products' };
 
       return { status: 'ok', product: makeProduct(best), matchCount: candidates.length };
@@ -101,6 +101,8 @@ async function looksBlocked(page) {
     if (/\/errors\/validateCaptcha|\/ap\/cvf|\/gp\/cctv/i.test(url)) return true;
     return await page.evaluate(() => {
       const t = document.body?.innerText || '';
+      // Amazon's soft rate-limit page: "Sorry! Something went wrong!" (also served in Arabic)
+      if (/sorry! something went wrong|we.re working on it|عذرًا!/i.test(`${document.title} ${t.slice(0, 300)}`)) return true;
       return (
         !!document.querySelector('form[action*="validateCaptcha"], #captchacharacters') ||
         /enter the characters you see|type the characters you see below|not a robot|sorry, we just need to make sure you're not a robot/i.test(
