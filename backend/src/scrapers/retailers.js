@@ -28,6 +28,9 @@ export const RETAILERS = {
     homepage: 'https://www.noon.com/uae-en',
     host: 'www.noon.com',
     searchTemplate: 'https://www.noon.com/uae-en/search?q={q}',
+    // Noon's robots.txt disallows its search pages, so the catalog does not scrape
+    // it: results show a "Search Noon" link instead of a price.
+    scrapeInCatalog: false,
     order: 3,
   },
   amazon: {

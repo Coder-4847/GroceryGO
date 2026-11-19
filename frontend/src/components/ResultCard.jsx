@@ -90,7 +90,11 @@ export default function ResultCard({ card, isCheapest, rank }) {
         </>
       ) : (
         <div className="result-card-empty">
-          <p>{STATUS_COPY[status] || 'Unavailable right now.'}</p>
+          <p>
+            {card.message === 'link_only'
+              ? "We don't pull prices from this store. Check it directly."
+              : STATUS_COPY[status] || 'Unavailable right now.'}
+          </p>
           <a
             className="visit-btn visit-btn--ghost"
             href={card.searchUrl || card.homepage}

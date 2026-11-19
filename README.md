@@ -35,6 +35,11 @@ The public site is fully static. A GitHub Actions workflow
 3. **Deploy** — the React app is built with the data baked in and published to
    GitHub Pages. Searching happens in the browser, so it works on any device.
 
+**Live prices need an unblocked network.** Carrefour, Lulu and Amazon.ae block GitHub's
+cloud servers, so see [docs/SELF_HOSTED_RUNNER.md](docs/SELF_HOSTED_RUNNER.md) to run the
+same workflow from a home machine (no coding, ~10 minutes). Noon is link-only because its
+robots.txt disallows automated search.
+
 Run it on demand from **Actions → Scrape prices and deploy site → Run workflow**.
 To add products, append to `catalog/items.json` (see an existing entry for the
 fields) — the next run picks them up. In Settings → Pages the source must be

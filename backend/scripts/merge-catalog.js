@@ -82,6 +82,12 @@ const items = catalog.map((it) => {
   const cards = {};
   for (const r of RETAILER_LIST) {
     if (it.retailers && !it.retailers.includes(r.id)) continue; // not compared here
+    if (r.scrapeInCatalog === false) {
+      // link-only retailer (robots.txt forbids scraping it): never carry prices forward
+      cards[r.id] = { status: 'unavailable', message: 'link_only', fetchedAt: null };
+      counts[r.id].unavailable += 1;
+      continue;
+    }
     let card = newCards[r.id] ? compact(newCards[r.id]) : null;
     const old = oldCards[r.id];
     const oldAgeH = old?.fetchedAt ? (now - Date.parse(old.fetchedAt)) / 36e5 : Infinity;
