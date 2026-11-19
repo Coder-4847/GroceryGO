@@ -1,5 +1,5 @@
 import { RETAILERS } from './retailers.js';
-import { runBrowserScraper, pickBestMatch } from '../lib/scrape-helpers.js';
+import { runBrowserScraper, pickBestMatch, assertNotBlocked } from '../lib/scrape-helpers.js';
 import { makeProduct, absoluteUrl } from '../lib/normalize.js';
 
 const BASE = 'https://gcc.luluhypermarket.com';
@@ -27,6 +27,7 @@ export async function scrapeLulu(query, opts = {}) {
           .catch(() => null),
       ]).catch(() => null);
 
+      await assertNotBlocked(page, 'Lulu');
       if (outcome === 'empty') return { status: 'no_results', message: 'No matching products' };
 
       // Nudge lazy-loaded cards in.
@@ -78,7 +79,10 @@ export async function scrapeLulu(query, opts = {}) {
       });
 
       log.info(`parsed ${items.length} candidates`);
-      if (!items.length) return { status: 'no_results', message: 'No matching products' };
+      if (!items.length) {
+        await assertNotBlocked(page, 'Lulu');
+        return { status: 'no_results', message: 'No matching products' };
+      }
 
       const candidates = items.map((it) => ({
         name: it.name,

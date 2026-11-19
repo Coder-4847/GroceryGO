@@ -185,3 +185,29 @@ export function matchesConstraints(name, { must = [], mustNot = [], allowMulti =
   }
   return true;
 }
+
+/**
+ * Throw if the page is a bot-wall interstitial (Cloudflare "Attention Required" /
+ * "Just a moment", Akamai "Access Denied", generic "you have been blocked").
+ * Without this a blocked page parses as "0 products" and is wrongly reported as
+ * "not found" instead of "couldn't be checked".
+ */
+export async function assertNotBlocked(page, retailerName = 'retailer') {
+  const test = () =>
+    page.evaluate(() => {
+      const t = `${document.title} ${(document.body?.innerText || '').slice(0, 600)}`;
+      return /attention required|just a moment|access denied|you have been blocked|verify you are (a )?human|unusual traffic|checking your browser/i.test(t);
+    });
+  let blocked = false;
+  for (let attempt = 0; attempt < 4; attempt++) {
+    try {
+      blocked = await test();
+      break;
+    } catch {
+      // the interstitial navigates/reloads; wait for it to settle and look again
+      await page.waitForLoadState('domcontentloaded', { timeout: 5000 }).catch(() => {});
+      await new Promise((r) => setTimeout(r, 1200));
+    }
+  }
+  if (blocked) throw new Error(`${retailerName} served a bot-protection page (blocked from this network)`);
+}

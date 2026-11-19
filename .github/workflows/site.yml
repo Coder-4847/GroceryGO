@@ -24,7 +24,10 @@ env:
 jobs:
   scrape:
     name: Scrape shard ${{ matrix.shard }}
-    runs-on: ubuntu-latest
+    # Retailers block GitHub's datacenter IPs. To scrape from an unblocked network,
+    # register a self-hosted runner on an always-on machine at home and set the repo
+    # variable SCRAPER_RUNNER=self-hosted (Settings -> Variables -> Actions).
+    runs-on: ${{ vars.SCRAPER_RUNNER || 'ubuntu-latest' }}
     timeout-minutes: 40
     strategy:
       fail-fast: false
@@ -46,6 +49,7 @@ jobs:
         run: npm ci
 
       - name: Make sure Xvfb is available (the scrapers need a real, headed Chrome)
+        if: runner.os == 'Linux'
         run: command -v Xvfb || (sudo apt-get update -qq && sudo apt-get install -y -qq xvfb)
 
       - name: Scrape

@@ -95,13 +95,14 @@ export function suggestItems(catalog, query, limit = 6) {
   return partial ? [] : hits.slice(0, limit).map((i) => i.name)
 }
 
-function toCard(catalog, retailerId, c) {
+function toCard(catalog, retailerId, c, item) {
   const r = catalog.retailerById[retailerId]
   return {
     retailer: r.id,
     retailerName: r.name,
     retailerColor: r.color,
     homepage: r.homepage,
+    searchUrl: r.searchTemplate && item.query ? r.searchTemplate.replace('{q}', encodeURIComponent(item.query)) : null,
     status: c.status,
     product: c.product || null,
     message: c.message || null,
@@ -114,7 +115,7 @@ function toCard(catalog, retailerId, c) {
 function buildPayload(catalog, item, { alternatives = [], partial = false } = {}) {
   const rank = (c) => (c.status === 'ok' ? 0 : c.status === 'no_results' ? 1 : 2)
   const results = Object.entries(item.cards)
-    .map(([id, c]) => toCard(catalog, id, c))
+    .map(([id, c]) => toCard(catalog, id, c, item))
     .sort((a, b) => {
       if (rank(a) !== rank(b)) return rank(a) - rank(b)
       if (a.status === 'ok' && b.status === 'ok') return a.product.price - b.product.price

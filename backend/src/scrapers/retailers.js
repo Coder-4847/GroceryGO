@@ -9,6 +9,7 @@ export const RETAILERS = {
     color: '#004E9F',
     homepage: 'https://www.carrefouruae.com',
     host: 'www.carrefouruae.com',
+    searchTemplate: 'https://www.carrefouruae.com/mafuae/en/search?keyword={q}',
     order: 1,
   },
   lulu: {
@@ -17,6 +18,7 @@ export const RETAILERS = {
     color: '#00A54F',
     homepage: 'https://gcc.luluhypermarket.com/en-ae',
     host: 'gcc.luluhypermarket.com',
+    searchTemplate: 'https://gcc.luluhypermarket.com/en-ae/list/?search_text={q}',
     order: 2,
   },
   noon: {
@@ -25,6 +27,7 @@ export const RETAILERS = {
     color: '#FEEE00',
     homepage: 'https://www.noon.com/uae-en',
     host: 'www.noon.com',
+    searchTemplate: 'https://www.noon.com/uae-en/search?q={q}',
     order: 3,
   },
   amazon: {
@@ -33,6 +36,7 @@ export const RETAILERS = {
     color: '#FF9900',
     homepage: 'https://www.amazon.ae',
     host: 'www.amazon.ae',
+    searchTemplate: 'https://www.amazon.ae/s?k={q}',
     order: 4,
   },
 };

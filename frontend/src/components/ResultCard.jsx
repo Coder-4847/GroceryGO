@@ -91,8 +91,13 @@ export default function ResultCard({ card, isCheapest, rank }) {
       ) : (
         <div className="result-card-empty">
           <p>{STATUS_COPY[status] || 'Unavailable right now.'}</p>
-          <a className="visit-btn visit-btn--ghost" href={card.homepage} target="_blank" rel="noopener noreferrer">
-            Open {card.retailerName} ↗
+          <a
+            className="visit-btn visit-btn--ghost"
+            href={card.searchUrl || card.homepage}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {card.searchUrl ? `Search ${card.retailerName}` : `Open ${card.retailerName}`} ↗
           </a>
         </div>
       )}

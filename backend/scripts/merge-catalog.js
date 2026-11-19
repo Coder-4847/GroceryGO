@@ -93,13 +93,13 @@ const items = catalog.map((it) => {
     counts[r.id][card.status] += 1;
     if (card.stale) counts[r.id].stale += 1;
   }
-  return { id: it.id, name: it.name, category: it.category, rank: it.rank, aliases: it.aliases || [], cards };
+  return { id: it.id, name: it.name, category: it.category, rank: it.rank, query: it.query, aliases: it.aliases || [], cards };
 });
 
 const out = {
   version: 1,
   generatedAt: new Date().toISOString(),
-  retailers: RETAILER_LIST.map(({ id, name, color, homepage }) => ({ id, name, color, homepage })),
+  retailers: RETAILER_LIST.map(({ id, name, color, homepage, searchTemplate }) => ({ id, name, color, homepage, searchTemplate })),
   items,
 };
 await fs.mkdir(path.dirname(path.resolve(outPath)), { recursive: true });

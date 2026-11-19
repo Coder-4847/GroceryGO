@@ -1,5 +1,5 @@
 import { RETAILERS } from './retailers.js';
-import { runBrowserScraper, pickBestMatch } from '../lib/scrape-helpers.js';
+import { runBrowserScraper, pickBestMatch, assertNotBlocked } from '../lib/scrape-helpers.js';
 import { makeProduct, absoluteUrl } from '../lib/normalize.js';
 
 const BASE = 'https://www.noon.com';
@@ -30,6 +30,7 @@ export async function scrapeNoon(query, opts = {}) {
           .catch(() => null),
       ]).catch(() => null);
 
+      await assertNotBlocked(page, 'Noon');
       if (outcome === 'empty') return { status: 'no_results', message: 'No matching products' };
       if (!outcome) throw new Error('search results did not render');
 
@@ -111,7 +112,10 @@ export async function scrapeNoon(query, opts = {}) {
       });
 
       log.info(`parsed ${items.length} candidates`);
-      if (!items.length) return { status: 'no_results', message: 'No priced products found' };
+      if (!items.length) {
+        await assertNotBlocked(page, 'Noon');
+        return { status: 'no_results', message: 'No priced products found' };
+      }
 
       const candidates = items.map((it) => ({
         name: it.name,
