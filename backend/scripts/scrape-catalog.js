@@ -34,7 +34,9 @@ const BLOCK_AFTER = 6;
 const catalog = JSON.parse(await fs.readFile(catalogPath, 'utf8'));
 let items = catalog.filter((_, i) => i % shards === shard);
 if (limitN) items = items.slice(0, limitN);
-const retailerIds = Object.keys(SCRAPERS).filter((id) => !only.length || only.includes(id));
+const retailerIds = Object.keys(SCRAPERS).filter(
+  (id) => RETAILERS[id].scrapeInCatalog !== false && (!only.length || only.includes(id))
+);
 
 console.log(`shard ${shard + 1}/${shards}: ${items.length} items x ${retailerIds.join(', ')}`);
 

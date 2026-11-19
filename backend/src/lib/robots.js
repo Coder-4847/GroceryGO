@@ -13,19 +13,31 @@ async function loadRules(origin) {
   const cached = cache.get(cacheKey);
   if (cached) return cached;
 
+  // If robots.txt can't be read (network error, 401/403, 5xx) we do NOT assume
+  // everything is allowed: that would scrape sites whose rules we couldn't check
+  // (and bot walls often 403 the robots.txt fetch too). Only a clean 2xx (use the
+  // rules) or 404/410 (no robots file, so no restrictions) opens the door.
   let text = '';
+  let ttl = 12 * 60 * 60 * 1000;
+  let denyAll = false;
   try {
     const res = await fetch(`${origin}/robots.txt`, {
       headers: { 'User-Agent': config.userAgent },
       signal: AbortSignal.timeout(8000),
     });
     if (res.ok) text = await res.text();
+    else if (res.status !== 404 && res.status !== 410) {
+      denyAll = true;
+      log.warn(`robots.txt for ${origin} returned ${res.status}; treating as disallowed`);
+    }
   } catch (err) {
-    log.warn(`could not fetch robots for ${origin}: ${err.message}`);
+    denyAll = true;
+    log.warn(`could not fetch robots for ${origin} (${err.message}); treating as disallowed`);
   }
+  if (denyAll) ttl = 10 * 60 * 1000; // retry soon
 
-  const rules = parse(text);
-  cache.set(cacheKey, rules, 12 * 60 * 60 * 1000);
+  const rules = denyAll ? [{ agents: ['*'], rules: [{ type: 'disallow', path: '/' }] }] : parse(text);
+  cache.set(cacheKey, rules, ttl);
   return rules;
 }
 

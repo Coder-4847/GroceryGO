@@ -51,7 +51,9 @@ export default function ResultsGrid({ payload, query, onAddToBasket, inBasket, o
             )}
           </p>
         ) : (
-          <p className="results-lede">No prices available for this one right now.</p>
+          <p className="results-lede">
+            Live prices aren&rsquo;t available for this item right now. Use the links below to check each store.
+          </p>
         )}
         {payload?.partial && (
           <p className="results-note">Showing the closest match we track. Pick another below if it&rsquo;s not what you meant.</p>
