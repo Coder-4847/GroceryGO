@@ -6,6 +6,10 @@ import ResultsGrid from './components/ResultsGrid.jsx'
 import BasketDrawer from './components/BasketDrawer.jsx'
 import { useSearch } from './hooks/useSearch.js'
 import { useBasket } from './hooks/useBasket.js'
+import { isStatic, loadCatalog, suggestItems } from './lib/catalog.js'
+import { relativeTime } from './lib/format.js'
+
+const STATIC_CHIPS = ['milk', 'eggs', 'rice', 'olive oil', 'coffee', 'detergent', 'headphones', 'power bank']
 
 const RETAILERS = ['Carrefour', 'Lulu', 'Noon', 'Amazon.ae']
 
@@ -13,6 +17,11 @@ export default function App() {
   const search = useSearch()
   const basket = useBasket()
   const [drawerOpen, setDrawerOpen] = useState(false)
+  const [catalog, setCatalog] = useState(null)
+
+  useEffect(() => {
+    if (isStatic) loadCatalog().then(setCatalog).catch(() => {})
+  }, [])
 
   // reflect the current query in the URL so searches are shareable / reloadable
   useEffect(() => {
@@ -70,12 +79,18 @@ export default function App() {
             <div className="hero-copy">
               <h1>One search. Every price.</h1>
               <p>
-                Compare grocery &amp; household prices across {RETAILERS.join(', ')} in the UAE —
-                and see the cheapest option at a glance.
+                Compare grocery, household &amp; electronics prices across {RETAILERS.join(', ')} in the
+                UAE — and see the cheapest option at a glance.
               </p>
             </div>
           )}
-          <SearchBar onSearch={onSearch} loading={search.status === 'loading'} initialValue={search.query} />
+          <SearchBar
+            onSearch={onSearch}
+            loading={search.status === 'loading'}
+            initialValue={search.query}
+            suggest={isStatic ? (q) => suggestItems(catalog, q) : undefined}
+            chips={isStatic ? STATIC_CHIPS : undefined}
+          />
         </section>
 
         {search.status === 'error' && (
@@ -103,6 +118,7 @@ export default function App() {
                 query={search.data.query}
                 onAddToBasket={(q, payload) => basket.addFromResults(q, payload)}
                 inBasket={basket.has(search.data.query)}
+                onPickItem={onSearch}
               />
             </motion.div>
           )}
@@ -111,8 +127,11 @@ export default function App() {
 
       <footer className="site-foot">
         <p>
-          GroceryGO compares publicly listed prices. Prices update roughly every 20 minutes and may
-          differ at checkout. Not affiliated with any retailer.
+          GroceryGO compares publicly listed prices.{' '}
+          {isStatic
+            ? `Prices are collected automatically every few hours${catalog?.generatedAt ? ` (last update ${relativeTime(Date.parse(catalog.generatedAt))})` : ''} and may differ at checkout.`
+            : 'Prices update roughly every 20 minutes and may differ at checkout.'}{' '}
+          Not affiliated with any retailer.
         </p>
       </footer>
 
@@ -126,6 +145,7 @@ function LoadingSkeleton({ query }) {
   // for it (and a browser) to spin up. Let the user know if it's taking a while.
   const [slow, setSlow] = useState(false)
   useEffect(() => {
+    if (isStatic) return undefined
     const t = setTimeout(() => setSlow(true), 7000)
     return () => clearTimeout(t)
   }, [])

@@ -664,3 +664,66 @@
     width: 100%;
   }
 }
+
+/* ---- Static catalog additions ---------------------------------------- */
+.searchbar-field {
+  position: relative;
+}
+.suggest-list {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  right: 0;
+  z-index: 20;
+  margin: 0;
+  padding: 6px;
+  list-style: none;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-md);
+  text-align: left;
+}
+.suggest-item {
+  width: 100%;
+  text-align: left;
+  border: none;
+  background: transparent;
+  color: var(--text);
+  font-size: 0.95rem;
+  padding: 10px 12px;
+  border-radius: var(--radius-sm);
+}
+.suggest-item:hover,
+.suggest-item:focus-visible {
+  background: var(--brand-tint);
+  outline: none;
+}
+.results-asof,
+.result-asof {
+  margin: 4px 0 0;
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+.results-note {
+  margin: 6px 0 0;
+  font-size: 0.88rem;
+  color: var(--accent);
+}
+.results-alts {
+  margin-top: 28px;
+}
+.results-alts-title {
+  margin: 0 0 10px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+.alt-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.alt-chips .chip {
+  text-align: left;
+}

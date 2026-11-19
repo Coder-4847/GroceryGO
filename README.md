@@ -20,6 +20,26 @@ lives in the backend service, which exposes a small REST API the frontend calls.
 
 ---
 
+## Live site (GitHub Pages — no server needed)
+
+The public site is fully static. A GitHub Actions workflow
+([`.github/workflows/site.yml`](.github/workflows/site.yml)) runs every 6 hours:
+
+1. **Scrape** — 5 parallel jobs open real Chrome and look up every item in
+   [`catalog/items.json`](catalog/items.json) at Carrefour, Lulu, Noon and Amazon.ae.
+   Each catalog item pins the exact product (brand, size, exclusions, plausible
+   price range) so prices are comparable like-for-like.
+2. **Merge** — results are combined into `prices.json`. If a retailer is
+   temporarily blocked, the last good price (under 72 h old) is kept and marked
+   "older price".
+3. **Deploy** — the React app is built with the data baked in and published to
+   GitHub Pages. Searching happens in the browser, so it works on any device.
+
+Run it on demand from **Actions → Scrape prices and deploy site → Run workflow**.
+To add products, append to `catalog/items.json` (see an existing entry for the
+fields) — the next run picks them up. In Settings → Pages the source must be
+"GitHub Actions".
+
 ## Quick start (local)
 
 Two terminals.
