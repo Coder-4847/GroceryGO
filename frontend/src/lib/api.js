@@ -5,15 +5,12 @@
  * In prod (GitHub Pages): set VITE_API_BASE to the deployed backend URL, e.g.
  *   VITE_API_BASE=https://grocerygo-api.onrender.com
  */
-const API_BASE = (import.meta.env.VITE_API_BASE || '/api').replace(/\/$/, '')
+import { ApiError } from './api-error.js'
+import { isStatic, searchCatalog } from './catalog.js'
 
-export class ApiError extends Error {
-  constructor(message, status) {
-    super(message)
-    this.name = 'ApiError'
-    this.status = status
-  }
-}
+export { ApiError }
+
+const API_BASE = (import.meta.env.VITE_API_BASE || '/api').replace(/\/$/, '')
 
 async function getJson(path, { signal } = {}) {
   let res
@@ -36,6 +33,8 @@ async function getJson(path, { signal } = {}) {
  * @returns {Promise<{ query: string, results: RetailerCard[], cheapest: string|null }>}
  */
 export function searchItem(item, opts = {}) {
+  // GitHub Pages build: search the pre-scraped catalog in the browser, no backend.
+  if (isStatic) return searchCatalog(item)
   const params = new URLSearchParams({ item })
   if (opts.fresh) params.set('fresh', '1')
   return getJson(`/search?${params.toString()}`, opts)

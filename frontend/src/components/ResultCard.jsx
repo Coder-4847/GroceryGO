@@ -1,10 +1,10 @@
 import { motion } from 'framer-motion'
 import RetailerLogo from './RetailerLogo.jsx'
-import { aed } from '../lib/format.js'
+import { aed, relativeTime } from '../lib/format.js'
 
 const STATUS_COPY = {
-  no_results: 'No match found for this search.',
-  unavailable: 'Unavailable right now — try again shortly.',
+  no_results: 'Not found at this retailer.',
+  unavailable: "Couldn't be checked in the latest update.",
 }
 
 export default function ResultCard({ card, isCheapest, rank }) {
@@ -37,6 +37,11 @@ export default function ResultCard({ card, isCheapest, rank }) {
           </motion.span>
         )}
         {ok && card.cached && <span className="cached-tag" title="From cache">cached</span>}
+        {ok && card.stale && (
+          <span className="cached-tag" title="This retailer couldn't be checked in the latest update, so this is the last price we saw">
+            older price
+          </span>
+        )}
       </header>
 
       {ok ? (
@@ -48,6 +53,7 @@ export default function ResultCard({ card, isCheapest, rank }) {
                 src={product.image}
                 alt=""
                 loading="lazy"
+                referrerPolicy="no-referrer"
                 onError={(e) => {
                   e.currentTarget.style.display = 'none'
                 }}
@@ -62,6 +68,9 @@ export default function ResultCard({ card, isCheapest, rank }) {
                 {product.name}
               </p>
               {product.unit && <p className="result-unit">{product.unit}</p>}
+              {card.fetchedAt && (
+                <p className="result-asof">Checked {relativeTime(Date.parse(card.fetchedAt))}</p>
+              )}
             </div>
           </div>
 
@@ -82,8 +91,13 @@ export default function ResultCard({ card, isCheapest, rank }) {
       ) : (
         <div className="result-card-empty">
           <p>{STATUS_COPY[status] || 'Unavailable right now.'}</p>
-          <a className="visit-btn visit-btn--ghost" href={card.homepage} target="_blank" rel="noopener noreferrer">
-            Open {card.retailerName} ↗
+          <a
+            className="visit-btn visit-btn--ghost"
+            href={card.searchUrl || card.homepage}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {card.searchUrl ? `Search ${card.retailerName}` : `Open ${card.retailerName}`} ↗
           </a>
         </div>
       )}

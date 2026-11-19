@@ -1,8 +1,25 @@
 import { AnimatePresence, motion } from 'framer-motion'
 import ResultCard from './ResultCard.jsx'
-import { aed } from '../lib/format.js'
+import { aed, relativeTime } from '../lib/format.js'
 
-export default function ResultsGrid({ payload, query, onAddToBasket, inBasket }) {
+export default function ResultsGrid({ payload, query, onAddToBasket, inBasket, onPickItem }) {
+  if (payload?.notFound) {
+    return (
+      <section className="results" aria-live="polite">
+        <div className="results-summary">
+          <h2>
+            We don&rsquo;t track <span className="results-query">&ldquo;{payload.query}&rdquo;</span> yet
+          </h2>
+          <p className="results-lede">
+            GroceryGO compares a growing list of popular groceries, household items and electronics.
+            Try one of these:
+          </p>
+        </div>
+        <AlternativeChips names={payload.alternatives} onPick={onPickItem} />
+      </section>
+    )
+  }
+
   const results = payload?.results || []
   const priced = results.filter((r) => r.status === 'ok' && r.product?.price != null)
   const cheapestCard = priced.length
@@ -34,7 +51,13 @@ export default function ResultsGrid({ payload, query, onAddToBasket, inBasket })
             )}
           </p>
         ) : (
-          <p className="results-lede">No live prices came back for this one.</p>
+          <p className="results-lede">No prices available for this one right now.</p>
+        )}
+        {payload?.partial && (
+          <p className="results-note">Showing the closest match we track. Pick another below if it&rsquo;s not what you meant.</p>
+        )}
+        {payload?.generatedAt && (
+          <p className="results-asof">Prices checked {relativeTime(Date.parse(payload.generatedAt))}</p>
         )}
       </div>
 
@@ -62,6 +85,25 @@ export default function ResultsGrid({ payload, query, onAddToBasket, inBasket })
           </button>
         </motion.div>
       )}
+
+      {payload?.alternatives?.length > 0 && (
+        <div className="results-alts">
+          <p className="results-alts-title">Also in this search</p>
+          <AlternativeChips names={payload.alternatives} onPick={onPickItem} />
+        </div>
+      )}
     </section>
+  )
+}
+
+function AlternativeChips({ names = [], onPick }) {
+  return (
+    <div className="alt-chips">
+      {names.map((n) => (
+        <button type="button" key={n} className="chip" onClick={() => onPick?.(n)}>
+          {n}
+        </button>
+      ))}
+    </div>
   )
 }

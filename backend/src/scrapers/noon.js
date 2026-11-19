@@ -1,5 +1,5 @@
 import { RETAILERS } from './retailers.js';
-import { runBrowserScraper, pickBestMatch } from '../lib/scrape-helpers.js';
+import { runBrowserScraper, pickBestMatch, assertNotBlocked } from '../lib/scrape-helpers.js';
 import { makeProduct, absoluteUrl } from '../lib/normalize.js';
 
 const BASE = 'https://www.noon.com';
@@ -15,7 +15,7 @@ const searchUrl = (q) => `${BASE}/uae-en/search?q=${encodeURIComponent(q)}`;
  * between deploys, so selectors match on the stable class-name *prefix*.
  * Product names are cross-checked against the page's JSON-LD ItemList.
  */
-export async function scrapeNoon(query) {
+export async function scrapeNoon(query, opts = {}) {
   return runBrowserScraper(
     RETAILERS.noon,
     query,
@@ -30,6 +30,7 @@ export async function scrapeNoon(query) {
           .catch(() => null),
       ]).catch(() => null);
 
+      await assertNotBlocked(page, 'Noon');
       if (outcome === 'empty') return { status: 'no_results', message: 'No matching products' };
       if (!outcome) throw new Error('search results did not render');
 
@@ -111,7 +112,10 @@ export async function scrapeNoon(query) {
       });
 
       log.info(`parsed ${items.length} candidates`);
-      if (!items.length) return { status: 'no_results', message: 'No priced products found' };
+      if (!items.length) {
+        await assertNotBlocked(page, 'Noon');
+        return { status: 'no_results', message: 'No priced products found' };
+      }
 
       const candidates = items.map((it) => ({
         name: it.name,
@@ -120,7 +124,7 @@ export async function scrapeNoon(query) {
         image: it.img,
       }));
 
-      const best = pickBestMatch(query, candidates);
+      const best = pickBestMatch(query, candidates, opts.constraints);
       if (!best) return { status: 'no_results', message: 'No matching products' };
 
       // If the chosen product's photo hadn't lazy-loaded, scroll to it and retry.

@@ -1,5 +1,11 @@
 # Project status — read this first if resuming
 
+> **Update 2026-11-19:** the repo is back on GitHub and the site is now a static
+> GitHub Pages app fed by a scheduled scrape (see the "Live site" section of
+> `README.md`). No backend host is needed for the public site. The text below is
+> the history that led here; the local backend (`HOW_TO_RUN.md`) still works for
+> live search of arbitrary items.
+
 **Last updated: 2026-09-11.**
 
 ## TL;DR

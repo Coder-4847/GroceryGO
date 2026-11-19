@@ -2,10 +2,12 @@ import { useRef, useState } from 'react'
 
 const SUGGESTIONS = ['bread', 'eggs', 'milk', 'olive oil', 'detergent', 'rice', 'shampoo', 'coffee']
 
-export default function SearchBar({ onSearch, loading, initialValue = '' }) {
+export default function SearchBar({ onSearch, loading, initialValue = '', suggest, chips = SUGGESTIONS }) {
   const [value, setValue] = useState(initialValue)
   const [lastSynced, setLastSynced] = useState(initialValue)
+  const [focused, setFocused] = useState(false)
   const inputRef = useRef(null)
+  const options = focused && suggest ? suggest(value) : []
 
   // When the query changes from outside (URL load, suggestion chip, logo reset),
   // mirror it into the field. Adjusting state during render is the documented
@@ -34,7 +36,9 @@ export default function SearchBar({ onSearch, loading, initialValue = '' }) {
           name="item"
           value={value}
           onChange={(e) => setValue(e.target.value)}
-          placeholder="Search any grocery or household item…"
+          onFocus={() => setFocused(true)}
+          onBlur={() => setTimeout(() => setFocused(false), 120)}
+          placeholder="Search groceries, household, electronics…"
           autoComplete="off"
           autoCapitalize="off"
           spellCheck="false"
@@ -44,9 +48,30 @@ export default function SearchBar({ onSearch, loading, initialValue = '' }) {
         <button type="submit" className="searchbar-go" disabled={loading || !value.trim()}>
           {loading ? <Spinner /> : 'Compare'}
         </button>
+        {options.length > 0 && (
+          <ul className="suggest-list" role="listbox">
+            {options.map((o) => (
+              <li key={o} role="option">
+                <button
+                  type="button"
+                  className="suggest-item"
+                  onMouseDown={(e) => e.preventDefault()}
+                  onClick={() => {
+                    setValue(o)
+                    setFocused(false)
+                    onSearch(o)
+                    inputRef.current?.blur()
+                  }}
+                >
+                  {o}
+                </button>
+              </li>
+            ))}
+          </ul>
+        )}
       </div>
       <div className="searchbar-suggestions">
-        {SUGGESTIONS.map((s) => (
+        {chips.map((s) => (
           <button
             type="button"
             key={s}

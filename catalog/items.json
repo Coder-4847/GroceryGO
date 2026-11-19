@@ -1,0 +1,2232 @@
+[
+ {
+  "id": "almarai-milk-full-fat-1l",
+  "name": "Almarai Fresh Milk Full Fat 1L",
+  "category": "Dairy & Eggs",
+  "query": "almarai fresh milk full fat 1l",
+  "must": [
+   "almarai",
+   "milk",
+   "1l"
+  ],
+  "mustNot": [
+   "low fat",
+   "skimmed",
+   "lactose",
+   "long life",
+   "laban",
+   "flavour",
+   "flavored",
+   "flavoured",
+   "flavored",
+   "chocolate",
+   "strawberry",
+   "banana",
+   "mango",
+   "vanilla"
+  ],
+  "aliases": [
+   "milk",
+   "fresh milk",
+   "full fat milk",
+   "dairy"
+  ],
+  "rank": 0,
+  "price": [
+   4,
+   10
+  ]
+ },
+ {
+  "id": "almarai-milk-low-fat-1l",
+  "name": "Almarai Fresh Milk Low Fat 1L",
+  "category": "Dairy & Eggs",
+  "query": "almarai fresh milk low fat 1l",
+  "must": [
+   "almarai",
+   "milk",
+   "1l",
+   "low fat"
+  ],
+  "mustNot": [
+   "long life",
+   "laban",
+   "flavoured",
+   "flavored",
+   "chocolate",
+   "strawberry",
+   "banana",
+   "mango",
+   "vanilla"
+  ],
+  "aliases": [
+   "milk",
+   "low fat milk",
+   "dairy"
+  ],
+  "rank": 1,
+  "price": [
+   4,
+   10
+  ]
+ },
+ {
+  "id": "al-rawabi-milk-1l",
+  "name": "Al Rawabi Fresh Milk Full Fat 1L",
+  "category": "Dairy & Eggs",
+  "query": "al rawabi fresh milk full fat 1l",
+  "must": [
+   "rawabi",
+   "milk",
+   "1l"
+  ],
+  "mustNot": [
+   "low fat",
+   "skimmed",
+   "long life",
+   "laban",
+   "flavoured",
+   "flavored",
+   "chocolate",
+   "strawberry",
+   "banana",
+   "mango",
+   "vanilla"
+  ],
+  "aliases": [
+   "milk",
+   "fresh milk",
+   "dairy"
+  ],
+  "rank": 2,
+  "price": [
+   4,
+   10
+  ]
+ },
+ {
+  "id": "eggs-30",
+  "name": "Fresh Eggs Large, 30 pack",
+  "category": "Dairy & Eggs",
+  "query": "eggs 30 pcs",
+  "must": [
+   "egg",
+   "30pcs"
+  ],
+  "mustNot": [
+   "quail",
+   "chocolate",
+   "boiled",
+   "omega",
+   "organic",
+   "powder",
+   "holder",
+   "rack",
+   "tray",
+   "dispenser",
+   "container",
+   "storage",
+   "boiler",
+   "cutter",
+   "slicer",
+   "cooker",
+   "maker",
+   "toy",
+   "cup",
+   "carton only",
+   "stamp",
+   "tool"
+  ],
+  "aliases": [
+   "eggs",
+   "egg",
+   "large eggs",
+   "dozen"
+  ],
+  "rank": 3,
+  "price": [
+   9,
+   35
+  ],
+  "retailers": [
+   "carrefour",
+   "lulu"
+  ]
+ },
+ {
+  "id": "lurpak-butter-200g",
+  "name": "Lurpak Unsalted Butter 200g",
+  "category": "Dairy & Eggs",
+  "query": "lurpak unsalted butter 200g",
+  "must": [
+   "lurpak",
+   "butter",
+   "200g"
+  ],
+  "mustNot": [
+   "spreadable",
+   "slightly"
+  ],
+  "aliases": [
+   "butter",
+   "dairy"
+  ],
+  "rank": 4,
+  "price": [
+   10,
+   30
+  ]
+ },
+ {
+  "id": "nido-milk-powder-900g",
+  "name": "Nestle Nido Fortigrow Milk Powder 900g",
+  "category": "Dairy & Eggs",
+  "query": "nido milk powder 900g",
+  "must": [
+   "nido",
+   "900g"
+  ],
+  "aliases": [
+   "milk powder",
+   "powdered milk",
+   "dairy"
+  ],
+  "rank": 5,
+  "price": [
+   25,
+   60
+  ]
+ },
+ {
+  "id": "india-gate-basmati-5kg",
+  "name": "India Gate Basmati Rice 5kg",
+  "category": "Pantry",
+  "query": "india gate basmati rice 5kg",
+  "must": [
+   "india gate",
+   "basmati",
+   "5kg"
+  ],
+  "aliases": [
+   "rice",
+   "basmati",
+   "basmati rice"
+  ],
+  "rank": 6,
+  "price": [
+   25,
+   70
+  ]
+ },
+ {
+  "id": "tilda-basmati-5kg",
+  "name": "Tilda Pure Basmati Rice 5kg",
+  "category": "Pantry",
+  "query": "tilda basmati rice 5kg",
+  "must": [
+   "tilda",
+   "basmati",
+   "5kg"
+  ],
+  "aliases": [
+   "rice",
+   "basmati",
+   "basmati rice"
+  ],
+  "rank": 7,
+  "price": [
+   40,
+   90
+  ]
+ },
+ {
+  "id": "daawat-basmati-5kg",
+  "name": "Daawat Basmati Rice 5kg",
+  "category": "Pantry",
+  "query": "daawat basmati rice 5kg",
+  "must": [
+   "daawat",
+   "basmati",
+   "5kg"
+  ],
+  "aliases": [
+   "rice",
+   "basmati",
+   "basmati rice"
+  ],
+  "rank": 8,
+  "price": [
+   25,
+   70
+  ]
+ },
+ {
+  "id": "noor-sunflower-oil-1-5l",
+  "name": "Noor Pure Sunflower Oil 1.5L",
+  "category": "Pantry",
+  "query": "noor sunflower oil 1.5l",
+  "must": [
+   "noor",
+   "sunflower",
+   "1.5l"
+  ],
+  "aliases": [
+   "oil",
+   "cooking oil",
+   "sunflower oil"
+  ],
+  "rank": 9,
+  "price": [
+   10,
+   30
+  ]
+ },
+ {
+  "id": "bertolli-olive-oil-500ml",
+  "name": "Bertolli Extra Virgin Olive Oil 500ml",
+  "category": "Pantry",
+  "query": "bertolli extra virgin olive oil 500ml",
+  "must": [
+   "bertolli",
+   "olive",
+   "500ml"
+  ],
+  "mustNot": [
+   "spray"
+  ],
+  "aliases": [
+   "olive oil",
+   "oil",
+   "extra virgin"
+  ],
+  "rank": 10,
+  "price": [
+   20,
+   60
+  ]
+ },
+ {
+  "id": "filippo-berio-olive-oil-500ml",
+  "name": "Filippo Berio Extra Virgin Olive Oil 500ml",
+  "category": "Pantry",
+  "query": "filippo berio extra virgin olive oil 500ml",
+  "must": [
+   "filippo berio",
+   "olive",
+   "500ml"
+  ],
+  "mustNot": [
+   "spray"
+  ],
+  "aliases": [
+   "olive oil",
+   "oil",
+   "extra virgin"
+  ],
+  "rank": 11,
+  "price": [
+   20,
+   60
+  ]
+ },
+ {
+  "id": "sugar-2kg",
+  "name": "White Sugar 2kg",
+  "category": "Pantry",
+  "query": "white sugar 2kg",
+  "must": [
+   "sugar",
+   "2kg"
+  ],
+  "mustNot": [
+   "brown",
+   "icing",
+   "cube",
+   "free",
+   "sweetener",
+   "stevia",
+   "cane",
+   "powdered"
+  ],
+  "aliases": [
+   "sugar"
+  ],
+  "rank": 12,
+  "price": [
+   5,
+   20
+  ],
+  "retailers": [
+   "carrefour",
+   "lulu"
+  ]
+ },
+ {
+  "id": "ashirvaad-atta-5kg",
+  "name": "Aashirvaad Whole Wheat Atta 5kg",
+  "category": "Pantry",
+  "query": "aashirvaad atta 5kg",
+  "must": [
+   "ashirvaad|aashirvaad|aashirwaad",
+   "5kg"
+  ],
+  "mustNot": [
+   "multigrain",
+   "sugar release"
+  ],
+  "aliases": [
+   "flour",
+   "atta",
+   "wheat flour"
+  ],
+  "rank": 13,
+  "price": [
+   15,
+   45
+  ]
+ },
+ {
+  "id": "barilla-spaghetti-500g",
+  "name": "Barilla Spaghetti No.5 500g",
+  "category": "Pantry",
+  "query": "barilla spaghetti 500g",
+  "must": [
+   "barilla",
+   "spaghetti",
+   "500g"
+  ],
+  "aliases": [
+   "pasta",
+   "spaghetti"
+  ],
+  "rank": 14,
+  "price": [
+   3,
+   15
+  ]
+ },
+ {
+  "id": "heinz-ketchup-570g",
+  "name": "Heinz Tomato Ketchup 570g",
+  "category": "Pantry",
+  "query": "heinz tomato ketchup 570g",
+  "must": [
+   "heinz",
+   "ketchup",
+   "570g"
+  ],
+  "aliases": [
+   "ketchup",
+   "tomato ketchup",
+   "sauce"
+  ],
+  "rank": 15,
+  "price": [
+   7,
+   25
+  ]
+ },
+ {
+  "id": "heinz-baked-beans-415g",
+  "name": "Heinz Baked Beans in Tomato Sauce 415g",
+  "category": "Pantry",
+  "query": "heinz baked beans 415g",
+  "must": [
+   "heinz",
+   "beans",
+   "415g"
+  ],
+  "aliases": [
+   "beans",
+   "baked beans"
+  ],
+  "rank": 16,
+  "price": [
+   3,
+   15
+  ]
+ },
+ {
+  "id": "nutella-350g",
+  "name": "Nutella Hazelnut Spread 350g",
+  "category": "Pantry",
+  "query": "nutella 350g",
+  "must": [
+   "nutella",
+   "350g"
+  ],
+  "aliases": [
+   "chocolate spread",
+   "hazelnut spread",
+   "spread"
+  ],
+  "rank": 17,
+  "price": [
+   10,
+   35
+  ]
+ },
+ {
+  "id": "kelloggs-corn-flakes-500g",
+  "name": "Kellogg's Corn Flakes 500g",
+  "category": "Pantry",
+  "query": "kelloggs corn flakes 500g",
+  "must": [
+   "kelloggs",
+   "corn flakes",
+   "500g"
+  ],
+  "aliases": [
+   "cereal",
+   "corn flakes",
+   "breakfast"
+  ],
+  "rank": 18,
+  "price": [
+   8,
+   30
+  ]
+ },
+ {
+  "id": "quaker-oats-500g",
+  "name": "Quaker Oats 500g",
+  "category": "Pantry",
+  "query": "quaker oats 500g",
+  "must": [
+   "quaker",
+   "oats",
+   "500g"
+  ],
+  "mustNot": [
+   "instant sachet"
+  ],
+  "aliases": [
+   "oats",
+   "porridge",
+   "breakfast"
+  ],
+  "rank": 19,
+  "price": [
+   5,
+   25
+  ]
+ },
+ {
+  "id": "lipton-yellow-label-100",
+  "name": "Lipton Yellow Label Tea, 100 Tea Bags",
+  "category": "Pantry",
+  "query": "lipton yellow label tea bags 100",
+  "must": [
+   "lipton",
+   "yellow label",
+   "100"
+  ],
+  "mustNot": [
+   "green",
+   "earl",
+   "decaf",
+   "25",
+   "50"
+  ],
+  "aliases": [
+   "tea",
+   "tea bags",
+   "black tea"
+  ],
+  "rank": 20,
+  "price": [
+   8,
+   30
+  ]
+ },
+ {
+  "id": "twinings-english-breakfast-50",
+  "name": "Twinings English Breakfast Tea, 50 Tea Bags",
+  "category": "Pantry",
+  "query": "twinings english breakfast tea bags 50",
+  "must": [
+   "twinings",
+   "english breakfast",
+   "50"
+  ],
+  "mustNot": [
+   "25",
+   "100"
+  ],
+  "aliases": [
+   "tea",
+   "tea bags",
+   "black tea"
+  ],
+  "rank": 21,
+  "price": [
+   8,
+   30
+  ]
+ },
+ {
+  "id": "nescafe-classic-200g",
+  "name": "Nescafe Classic Instant Coffee 200g",
+  "category": "Pantry",
+  "query": "nescafe classic instant coffee 200g",
+  "must": [
+   "nescafe",
+   "classic",
+   "200g"
+  ],
+  "mustNot": [
+   "3 in 1",
+   "3in1",
+   "decaf"
+  ],
+  "aliases": [
+   "coffee",
+   "instant coffee"
+  ],
+  "rank": 22,
+  "price": [
+   20,
+   60
+  ]
+ },
+ {
+  "id": "nescafe-gold-200g",
+  "name": "Nescafe Gold Instant Coffee 200g",
+  "category": "Pantry",
+  "query": "nescafe gold instant coffee 200g",
+  "must": [
+   "nescafe",
+   "gold",
+   "200g"
+  ],
+  "mustNot": [
+   "decaf",
+   "blend 3"
+  ],
+  "aliases": [
+   "coffee",
+   "instant coffee"
+  ],
+  "rank": 23,
+  "price": [
+   30,
+   90
+  ]
+ },
+ {
+  "id": "lavazza-rossa-250g",
+  "name": "Lavazza Qualita Rossa Ground Coffee 250g",
+  "category": "Pantry",
+  "query": "lavazza qualita rossa ground coffee 250g",
+  "must": [
+   "lavazza",
+   "rossa",
+   "250g"
+  ],
+  "mustNot": [
+   "beans",
+   "capsule",
+   "pods"
+  ],
+  "aliases": [
+   "coffee",
+   "ground coffee"
+  ],
+  "rank": 24,
+  "price": [
+   12,
+   45
+  ]
+ },
+ {
+  "id": "illy-classico-250g",
+  "name": "Illy Classico Ground Coffee 250g",
+  "category": "Pantry",
+  "query": "illy classico ground coffee 250g",
+  "must": [
+   "illy",
+   "250g"
+  ],
+  "mustNot": [
+   "beans",
+   "capsule",
+   "pods",
+   "decaf"
+  ],
+  "aliases": [
+   "coffee",
+   "ground coffee"
+  ],
+  "rank": 25,
+  "price": [
+   20,
+   70
+  ]
+ },
+ {
+  "id": "lays-classic-170g",
+  "name": "Lay's Classic Salted Potato Chips 170g",
+  "category": "Snacks",
+  "query": "lays classic salted chips 170g",
+  "must": [
+   "lays",
+   "170g"
+  ],
+  "mustNot": [
+   "pringles"
+  ],
+  "aliases": [
+   "chips",
+   "crisps",
+   "potato chips",
+   "snacks"
+  ],
+  "rank": 26,
+  "price": [
+   3,
+   15
+  ]
+ },
+ {
+  "id": "pringles-original-165g",
+  "name": "Pringles Original 165g",
+  "category": "Snacks",
+  "query": "pringles original 165g",
+  "must": [
+   "pringles",
+   "original",
+   "165g"
+  ],
+  "aliases": [
+   "chips",
+   "crisps",
+   "snacks"
+  ],
+  "rank": 27,
+  "price": [
+   4,
+   15
+  ]
+ },
+ {
+  "id": "mcvities-digestive-400g",
+  "name": "McVitie's Digestive Biscuits 400g",
+  "category": "Snacks",
+  "query": "mcvities digestive biscuits 400g",
+  "must": [
+   "mcvities",
+   "digestive",
+   "400g"
+  ],
+  "mustNot": [
+   "chocolate",
+   "dark",
+   "milk chocolate",
+   "caramel"
+  ],
+  "aliases": [
+   "biscuits",
+   "cookies",
+   "digestive"
+  ],
+  "rank": 28,
+  "price": [
+   5,
+   25
+  ]
+ },
+ {
+  "id": "haribo-goldbears-200g",
+  "name": "Haribo Goldbears Gummy Bears 200g",
+  "category": "Snacks",
+  "query": "haribo goldbears 200g",
+  "must": [
+   "haribo",
+   "200g"
+  ],
+  "aliases": [
+   "candy",
+   "sweets",
+   "gummy bears",
+   "snacks"
+  ],
+  "rank": 29,
+  "price": [
+   4,
+   20
+  ]
+ },
+ {
+  "id": "al-ain-water-1-5l",
+  "name": "Al Ain Drinking Water 1.5L",
+  "category": "Beverages",
+  "query": "al ain drinking water 1.5l",
+  "must": [
+   "al ain",
+   "water",
+   "1.5l"
+  ],
+  "mustNot": [
+   "sparkling",
+   "flavour",
+   "zero"
+  ],
+  "aliases": [
+   "water",
+   "drinking water",
+   "bottled water"
+  ],
+  "rank": 30,
+  "price": [
+   0.8,
+   5
+  ]
+ },
+ {
+  "id": "masafi-water-1-5l",
+  "name": "Masafi Drinking Water 1.5L",
+  "category": "Beverages",
+  "query": "masafi drinking water 1.5l",
+  "must": [
+   "masafi",
+   "water",
+   "1.5l"
+  ],
+  "mustNot": [
+   "sparkling",
+   "flavour"
+  ],
+  "aliases": [
+   "water",
+   "drinking water",
+   "bottled water"
+  ],
+  "rank": 31,
+  "price": [
+   0.8,
+   5
+  ]
+ },
+ {
+  "id": "evian-water-1-5l",
+  "name": "Evian Natural Mineral Water 1.5L",
+  "category": "Beverages",
+  "query": "evian natural mineral water 1.5l",
+  "must": [
+   "evian",
+   "1.5l"
+  ],
+  "mustNot": [
+   "sparkling"
+  ],
+  "aliases": [
+   "water",
+   "mineral water",
+   "bottled water"
+  ],
+  "rank": 32,
+  "price": [
+   3,
+   15
+  ]
+ },
+ {
+  "id": "pepsi-2-25l",
+  "name": "Pepsi 2.25L Bottle",
+  "category": "Beverages",
+  "query": "pepsi 2.25l",
+  "must": [
+   "pepsi",
+   "2.25l"
+  ],
+  "mustNot": [
+   "diet",
+   "max",
+   "zero"
+  ],
+  "aliases": [
+   "cola",
+   "soft drink",
+   "soda",
+   "fizzy"
+  ],
+  "rank": 33,
+  "price": [
+   3,
+   12
+  ]
+ },
+ {
+  "id": "coca-cola-2-25l",
+  "name": "Coca-Cola Original 2.25L Bottle",
+  "category": "Beverages",
+  "query": "coca cola 2.25l",
+  "must": [
+   "coca cola",
+   "2.25l"
+  ],
+  "mustNot": [
+   "zero",
+   "diet",
+   "light",
+   "vanilla",
+   "cherry"
+  ],
+  "aliases": [
+   "cola",
+   "coke",
+   "soft drink",
+   "soda",
+   "fizzy"
+  ],
+  "rank": 34,
+  "price": [
+   3,
+   12
+  ]
+ },
+ {
+  "id": "7up-2-25l",
+  "name": "7UP 2.25L Bottle",
+  "category": "Beverages",
+  "query": "7up 2.25l",
+  "must": [
+   "7up|7 up",
+   "2.25l"
+  ],
+  "mustNot": [
+   "free",
+   "zero",
+   "diet"
+  ],
+  "aliases": [
+   "lemon lime",
+   "soft drink",
+   "soda",
+   "fizzy"
+  ],
+  "rank": 35,
+  "price": [
+   3,
+   12
+  ]
+ },
+ {
+  "id": "almarai-orange-juice-1l",
+  "name": "Almarai Orange Juice 1L",
+  "category": "Beverages",
+  "query": "almarai orange juice 1l",
+  "must": [
+   "almarai",
+   "orange",
+   "1l"
+  ],
+  "mustNot": [
+   "mixed",
+   "mango",
+   "apple",
+   "carrot",
+   "nectar"
+  ],
+  "aliases": [
+   "juice",
+   "orange juice"
+  ],
+  "rank": 36,
+  "price": [
+   5,
+   15
+  ]
+ },
+ {
+  "id": "red-bull-250ml",
+  "name": "Red Bull Energy Drink 250ml",
+  "category": "Beverages",
+  "query": "red bull energy drink 250ml",
+  "must": [
+   "red bull",
+   "250ml"
+  ],
+  "mustNot": [
+   "sugarfree",
+   "sugar free",
+   "zero",
+   "editions"
+  ],
+  "aliases": [
+   "energy drink",
+   "energy"
+  ],
+  "rank": 37,
+  "price": [
+   4,
+   15
+  ]
+ },
+ {
+  "id": "san-pellegrino-750ml",
+  "name": "San Pellegrino Sparkling Water 750ml",
+  "category": "Beverages",
+  "query": "san pellegrino sparkling water 750ml",
+  "must": [
+   "pellegrino",
+   "750ml"
+  ],
+  "mustNot": [
+   "lemon",
+   "orange",
+   "aranciata",
+   "limonata"
+  ],
+  "aliases": [
+   "sparkling water",
+   "water",
+   "fizzy water"
+  ],
+  "rank": 38,
+  "price": [
+   5,
+   25
+  ]
+ },
+ {
+  "id": "ariel-powder-3kg",
+  "name": "Ariel Automatic Laundry Powder Detergent 3kg",
+  "category": "Household & Personal Care",
+  "query": "ariel automatic laundry powder detergent 3kg",
+  "must": [
+   "ariel",
+   "3kg",
+   "powder"
+  ],
+  "mustNot": [
+   "liquid",
+   "gel",
+   "pods",
+   "capsule"
+  ],
+  "aliases": [
+   "detergent",
+   "laundry",
+   "washing powder",
+   "laundry detergent"
+  ],
+  "rank": 39,
+  "price": [
+   20,
+   70
+  ]
+ },
+ {
+  "id": "tide-powder-3kg",
+  "name": "Tide Automatic Laundry Powder Detergent 3kg",
+  "category": "Household & Personal Care",
+  "query": "tide automatic laundry powder 3kg",
+  "must": [
+   "tide",
+   "3kg"
+  ],
+  "mustNot": [
+   "liquid",
+   "gel",
+   "pods"
+  ],
+  "aliases": [
+   "detergent",
+   "laundry",
+   "washing powder",
+   "laundry detergent"
+  ],
+  "rank": 40,
+  "price": [
+   20,
+   70
+  ]
+ },
+ {
+  "id": "fairy-dishwash-750ml",
+  "name": "Fairy Dishwashing Liquid 750ml",
+  "category": "Household & Personal Care",
+  "query": "fairy dishwashing liquid 750ml",
+  "must": [
+   "fairy",
+   "750ml"
+  ],
+  "mustNot": [
+   "tablet",
+   "dishwasher",
+   "pods",
+   "platinum"
+  ],
+  "aliases": [
+   "dishwash",
+   "dish soap",
+   "dishwashing liquid",
+   "washing up liquid"
+  ],
+  "rank": 41,
+  "price": [
+   6,
+   30
+  ]
+ },
+ {
+  "id": "harpic-750ml",
+  "name": "Harpic Toilet Cleaner 750ml",
+  "category": "Household & Personal Care",
+  "query": "harpic toilet cleaner 750ml",
+  "must": [
+   "harpic",
+   "750ml"
+  ],
+  "aliases": [
+   "toilet cleaner",
+   "cleaner",
+   "bathroom"
+  ],
+  "rank": 42,
+  "price": [
+   7,
+   30
+  ]
+ },
+ {
+  "id": "dettol-antiseptic-500ml",
+  "name": "Dettol Antiseptic Disinfectant Liquid 500ml",
+  "category": "Household & Personal Care",
+  "query": "dettol antiseptic liquid 500ml",
+  "must": [
+   "dettol",
+   "500ml",
+   "antiseptic|disinfectant"
+  ],
+  "mustNot": [
+   "spray",
+   "wipes"
+  ],
+  "aliases": [
+   "antiseptic",
+   "disinfectant",
+   "dettol"
+  ],
+  "rank": 43,
+  "price": [
+   12,
+   50
+  ]
+ },
+ {
+  "id": "colgate-total-75ml",
+  "name": "Colgate Total Toothpaste 75ml",
+  "category": "Household & Personal Care",
+  "query": "colgate total toothpaste 75ml",
+  "must": [
+   "colgate",
+   "total",
+   "75ml"
+  ],
+  "mustNot": [
+   "kids"
+  ],
+  "aliases": [
+   "toothpaste",
+   "oral care",
+   "dental"
+  ],
+  "rank": 44,
+  "price": [
+   5,
+   25
+  ]
+ },
+ {
+  "id": "head-shoulders-400ml",
+  "name": "Head & Shoulders Classic Clean Shampoo 400ml",
+  "category": "Household & Personal Care",
+  "query": "head and shoulders shampoo 400ml",
+  "must": [
+   "head shoulders",
+   "400ml"
+  ],
+  "mustNot": [
+   "conditioner",
+   "2in1",
+   "2 in 1"
+  ],
+  "aliases": [
+   "shampoo",
+   "anti dandruff",
+   "hair"
+  ],
+  "rank": 45,
+  "price": [
+   12,
+   50
+  ]
+ },
+ {
+  "id": "pantene-shampoo-400ml",
+  "name": "Pantene Pro-V Shampoo 400ml",
+  "category": "Household & Personal Care",
+  "query": "pantene pro-v shampoo 400ml",
+  "must": [
+   "pantene",
+   "400ml"
+  ],
+  "mustNot": [
+   "conditioner",
+   "2in1",
+   "2 in 1"
+  ],
+  "aliases": [
+   "shampoo",
+   "hair"
+  ],
+  "rank": 46,
+  "price": [
+   12,
+   50
+  ]
+ },
+ {
+  "id": "sunsilk-shampoo-350ml",
+  "name": "Sunsilk Shampoo 350ml",
+  "category": "Household & Personal Care",
+  "query": "sunsilk shampoo 350ml",
+  "must": [
+   "sunsilk",
+   "350ml"
+  ],
+  "mustNot": [
+   "conditioner"
+  ],
+  "aliases": [
+   "shampoo",
+   "hair"
+  ],
+  "rank": 47,
+  "price": [
+   8,
+   35
+  ]
+ },
+ {
+  "id": "dove-body-wash-500ml",
+  "name": "Dove Body Wash 500ml",
+  "category": "Household & Personal Care",
+  "query": "dove body wash 500ml",
+  "must": [
+   "dove",
+   "500ml",
+   "body wash|shower"
+  ],
+  "aliases": [
+   "body wash",
+   "shower gel",
+   "soap"
+  ],
+  "rank": 48,
+  "price": [
+   12,
+   50
+  ]
+ },
+ {
+  "id": "dove-deodorant-150ml",
+  "name": "Dove Original Antiperspirant Deodorant Spray 150ml",
+  "category": "Household & Personal Care",
+  "query": "dove deodorant spray 150ml",
+  "must": [
+   "dove",
+   "150ml",
+   "deodorant|antiperspirant"
+  ],
+  "mustNot": [
+   "roll",
+   "stick",
+   "men"
+  ],
+  "aliases": [
+   "deodorant",
+   "antiperspirant"
+  ],
+  "rank": 49,
+  "price": [
+   8,
+   30
+  ]
+ },
+ {
+  "id": "nivea-soft-cream-200ml",
+  "name": "Nivea Soft Moisturising Cream 200ml",
+  "category": "Household & Personal Care",
+  "query": "nivea soft cream 200ml",
+  "must": [
+   "nivea",
+   "soft",
+   "200ml"
+  ],
+  "aliases": [
+   "moisturiser",
+   "moisturizer",
+   "cream",
+   "skin care"
+  ],
+  "rank": 50,
+  "price": [
+   8,
+   35
+  ]
+ },
+ {
+  "id": "airpods-pro-2",
+  "name": "Apple AirPods Pro (2nd generation)",
+  "category": "Electronics",
+  "query": "apple airpods pro 2nd generation",
+  "must": [
+   "airpods pro",
+   "2nd|second|2nd gen"
+  ],
+  "mustNot": [
+   "case",
+   "cover",
+   "protector",
+   "screen guard",
+   "tempered",
+   "strap",
+   "band only",
+   "replacement",
+   "refurbished",
+   "renewed",
+   "used",
+   "skin",
+   "stand",
+   "tips",
+   "ear tips",
+   "hook"
+  ],
+  "aliases": [
+   "airpods",
+   "earbuds",
+   "headphones",
+   "earphones",
+   "apple"
+  ],
+  "rank": 51,
+  "price": [
+   650,
+   1300
+  ]
+ },
+ {
+  "id": "apple-airtag",
+  "name": "Apple AirTag (1 pack)",
+  "category": "Electronics",
+  "query": "apple airtag",
+  "must": [
+   "airtag"
+  ],
+  "mustNot": [
+   "case",
+   "cover",
+   "protector",
+   "screen guard",
+   "tempered",
+   "strap",
+   "band only",
+   "replacement",
+   "refurbished",
+   "renewed",
+   "used",
+   "skin",
+   "stand",
+   "holder",
+   "keychain",
+   "keyring",
+   "loop",
+   "wallet",
+   "sticker",
+   "4 pack",
+   "2 pack"
+  ],
+  "aliases": [
+   "airtag",
+   "tracker",
+   "apple"
+  ],
+  "rank": 52,
+  "price": [
+   80,
+   200
+  ]
+ },
+ {
+  "id": "iphone-15-128gb",
+  "name": "Apple iPhone 15 128GB",
+  "category": "Electronics",
+  "query": "apple iphone 15 128gb",
+  "must": [
+   "iphone 15",
+   "128gb|128 gb"
+  ],
+  "mustNot": [
+   "case",
+   "cover",
+   "protector",
+   "screen guard",
+   "tempered",
+   "strap",
+   "band only",
+   "replacement",
+   "refurbished",
+   "renewed",
+   "used",
+   "skin",
+   "stand",
+   "plus",
+   "pro",
+   "max",
+   "charger",
+   "cable",
+   "glass",
+   "magsafe",
+   "wallet"
+  ],
+  "aliases": [
+   "iphone",
+   "phone",
+   "smartphone",
+   "apple",
+   "mobile"
+  ],
+  "rank": 53,
+  "price": [
+   2000,
+   3600
+  ]
+ },
+ {
+  "id": "apple-watch-se",
+  "name": "Apple Watch SE",
+  "category": "Electronics",
+  "query": "apple watch se",
+  "must": [
+   "watch se"
+  ],
+  "mustNot": [
+   "case",
+   "cover",
+   "protector",
+   "screen guard",
+   "tempered",
+   "strap",
+   "band only",
+   "replacement",
+   "refurbished",
+   "renewed",
+   "used",
+   "skin",
+   "stand",
+   "charger",
+   "cable",
+   "band"
+  ],
+  "aliases": [
+   "apple watch",
+   "smartwatch",
+   "watch"
+  ],
+  "rank": 54,
+  "price": [
+   700,
+   1600
+  ]
+ },
+ {
+  "id": "apple-20w-adapter",
+  "name": "Apple 20W USB-C Power Adapter",
+  "category": "Electronics",
+  "query": "apple 20w usb-c power adapter",
+  "must": [
+   "apple",
+   "20w",
+   "adapter|charger"
+  ],
+  "mustNot": [
+   "cable",
+   "car",
+   "wireless"
+  ],
+  "aliases": [
+   "charger",
+   "adapter",
+   "usb-c",
+   "apple charger"
+  ],
+  "rank": 55,
+  "price": [
+   50,
+   120
+  ]
+ },
+ {
+  "id": "anker-powercore-10000",
+  "name": "Anker PowerCore 10000 Power Bank",
+  "category": "Electronics",
+  "query": "anker powercore 10000 power bank",
+  "must": [
+   "anker",
+   "powercore",
+   "10000"
+  ],
+  "mustNot": [
+   "redux",
+   "slim"
+  ],
+  "aliases": [
+   "power bank",
+   "powerbank",
+   "portable charger",
+   "charger"
+  ],
+  "rank": 56,
+  "price": [
+   60,
+   200
+  ]
+ },
+ {
+  "id": "jbl-flip-6",
+  "name": "JBL Flip 6 Portable Bluetooth Speaker",
+  "category": "Electronics",
+  "query": "jbl flip 6 bluetooth speaker",
+  "must": [
+   "jbl",
+   "flip 6"
+  ],
+  "mustNot": [
+   "case",
+   "cover",
+   "protector",
+   "screen guard",
+   "tempered",
+   "strap",
+   "band only",
+   "replacement",
+   "refurbished",
+   "renewed",
+   "used",
+   "skin",
+   "stand",
+   "strap"
+  ],
+  "aliases": [
+   "speaker",
+   "bluetooth speaker",
+   "jbl"
+  ],
+  "rank": 57,
+  "price": [
+   250,
+   700
+  ]
+ },
+ {
+  "id": "jbl-go-3",
+  "name": "JBL Go 3 Portable Bluetooth Speaker",
+  "category": "Electronics",
+  "query": "jbl go 3 bluetooth speaker",
+  "must": [
+   "jbl",
+   "go 3"
+  ],
+  "mustNot": [
+   "case",
+   "cover",
+   "protector",
+   "screen guard",
+   "tempered",
+   "strap",
+   "band only",
+   "replacement",
+   "refurbished",
+   "renewed",
+   "used",
+   "skin",
+   "stand"
+  ],
+  "aliases": [
+   "speaker",
+   "bluetooth speaker",
+   "jbl"
+  ],
+  "rank": 58,
+  "price": [
+   100,
+   280
+  ]
+ },
+ {
+  "id": "jbl-tune-510bt",
+  "name": "JBL Tune 510BT Wireless On-Ear Headphones",
+  "category": "Electronics",
+  "query": "jbl tune 510bt headphones",
+  "must": [
+   "jbl",
+   "510bt"
+  ],
+  "mustNot": [
+   "case",
+   "cover",
+   "protector",
+   "screen guard",
+   "tempered",
+   "strap",
+   "band only",
+   "replacement",
+   "refurbished",
+   "renewed",
+   "used",
+   "skin",
+   "stand"
+  ],
+  "aliases": [
+   "headphones",
+   "wireless headphones",
+   "jbl"
+  ],
+  "rank": 59,
+  "price": [
+   100,
+   280
+  ]
+ },
+ {
+  "id": "sony-wh-1000xm5",
+  "name": "Sony WH-1000XM5 Wireless Noise Cancelling Headphones",
+  "category": "Electronics",
+  "query": "sony wh-1000xm5 headphones",
+  "must": [
+   "sony",
+   "1000xm5"
+  ],
+  "mustNot": [
+   "case",
+   "cover",
+   "protector",
+   "screen guard",
+   "tempered",
+   "strap",
+   "band only",
+   "replacement",
+   "refurbished",
+   "renewed",
+   "used",
+   "skin",
+   "stand",
+   "pads",
+   "cushion",
+   "ear pad"
+  ],
+  "aliases": [
+   "headphones",
+   "noise cancelling",
+   "sony",
+   "wireless headphones"
+  ],
+  "rank": 60,
+  "price": [
+   800,
+   1700
+  ]
+ },
+ {
+  "id": "galaxy-buds2-pro",
+  "name": "Samsung Galaxy Buds2 Pro",
+  "category": "Electronics",
+  "query": "samsung galaxy buds2 pro",
+  "must": [
+   "buds2 pro"
+  ],
+  "mustNot": [
+   "case",
+   "cover",
+   "protector",
+   "screen guard",
+   "tempered",
+   "strap",
+   "band only",
+   "replacement",
+   "refurbished",
+   "renewed",
+   "used",
+   "skin",
+   "stand"
+  ],
+  "aliases": [
+   "earbuds",
+   "headphones",
+   "earphones",
+   "samsung",
+   "galaxy buds"
+  ],
+  "rank": 61,
+  "price": [
+   400,
+   900
+  ]
+ },
+ {
+  "id": "logitech-mx-master-3s",
+  "name": "Logitech MX Master 3S Wireless Mouse",
+  "category": "Electronics",
+  "query": "logitech mx master 3s wireless mouse",
+  "must": [
+   "logitech",
+   "mx master 3s"
+  ],
+  "mustNot": [
+   "case",
+   "cover",
+   "protector",
+   "screen guard",
+   "tempered",
+   "strap",
+   "band only",
+   "replacement",
+   "refurbished",
+   "renewed",
+   "used",
+   "skin",
+   "stand"
+  ],
+  "aliases": [
+   "mouse",
+   "wireless mouse",
+   "logitech"
+  ],
+  "rank": 62,
+  "price": [
+   300,
+   700
+  ]
+ },
+ {
+  "id": "logitech-m171",
+  "name": "Logitech M171 Wireless Mouse",
+  "category": "Electronics",
+  "query": "logitech m171 wireless mouse",
+  "must": [
+   "logitech",
+   "m171"
+  ],
+  "mustNot": [
+   "case",
+   "cover",
+   "protector",
+   "screen guard",
+   "tempered",
+   "strap",
+   "band only",
+   "replacement",
+   "refurbished",
+   "renewed",
+   "used",
+   "skin",
+   "stand"
+  ],
+  "aliases": [
+   "mouse",
+   "wireless mouse",
+   "logitech"
+  ],
+  "rank": 63,
+  "price": [
+   25,
+   90
+  ]
+ },
+ {
+  "id": "logitech-c920",
+  "name": "Logitech C920 HD Pro Webcam",
+  "category": "Electronics",
+  "query": "logitech c920 hd pro webcam",
+  "must": [
+   "logitech",
+   "c920"
+  ],
+  "mustNot": [
+   "case",
+   "cover",
+   "protector",
+   "screen guard",
+   "tempered",
+   "strap",
+   "band only",
+   "replacement",
+   "refurbished",
+   "renewed",
+   "used",
+   "skin",
+   "stand"
+  ],
+  "aliases": [
+   "webcam",
+   "camera",
+   "logitech"
+  ],
+  "rank": 64,
+  "price": [
+   150,
+   450
+  ]
+ },
+ {
+  "id": "sandisk-ultra-128gb-microsd",
+  "name": "SanDisk Ultra 128GB microSD Card",
+  "category": "Electronics",
+  "query": "sandisk ultra 128gb microsd card",
+  "must": [
+   "sandisk",
+   "ultra",
+   "128gb|128 gb",
+   "micro"
+  ],
+  "mustNot": [
+   "reader",
+   "adapter only",
+   "flash drive",
+   "usb"
+  ],
+  "aliases": [
+   "memory card",
+   "sd card",
+   "microsd",
+   "storage"
+  ],
+  "rank": 65,
+  "price": [
+   25,
+   90
+  ]
+ },
+ {
+  "id": "samsung-t7-1tb",
+  "name": "Samsung T7 Portable SSD 1TB",
+  "category": "Electronics",
+  "query": "samsung t7 portable ssd 1tb",
+  "must": [
+   "samsung",
+   "t7",
+   "1tb|1 tb"
+  ],
+  "mustNot": [
+   "shield",
+   "touch"
+  ],
+  "aliases": [
+   "ssd",
+   "external ssd",
+   "hard drive",
+   "storage"
+  ],
+  "rank": 66,
+  "price": [
+   250,
+   700
+  ]
+ },
+ {
+  "id": "seagate-portable-1tb",
+  "name": "Seagate Portable External Hard Drive 1TB",
+  "category": "Electronics",
+  "query": "seagate portable external hard drive 1tb",
+  "must": [
+   "seagate",
+   "1tb|1 tb"
+  ],
+  "mustNot": [
+   "ssd",
+   "nas",
+   "game drive"
+  ],
+  "aliases": [
+   "hard drive",
+   "external hard drive",
+   "hdd",
+   "storage"
+  ],
+  "rank": 67,
+  "price": [
+   180,
+   450
+  ]
+ },
+ {
+  "id": "kindle-paperwhite",
+  "name": "Amazon Kindle Paperwhite",
+  "category": "Electronics",
+  "query": "amazon kindle paperwhite",
+  "must": [
+   "kindle",
+   "paperwhite"
+  ],
+  "mustNot": [
+   "case",
+   "cover",
+   "protector",
+   "screen guard",
+   "tempered",
+   "strap",
+   "band only",
+   "replacement",
+   "refurbished",
+   "renewed",
+   "used",
+   "skin",
+   "stand",
+   "sleeve",
+   "pouch"
+  ],
+  "aliases": [
+   "kindle",
+   "ereader",
+   "e-reader",
+   "book reader",
+   "amazon"
+  ],
+  "rank": 68,
+  "price": [
+   350,
+   800
+  ]
+ },
+ {
+  "id": "fire-tv-stick-4k",
+  "name": "Amazon Fire TV Stick 4K",
+  "category": "Electronics",
+  "query": "amazon fire tv stick 4k",
+  "must": [
+   "fire tv stick",
+   "4k"
+  ],
+  "mustNot": [
+   "remote only",
+   "cover",
+   "case"
+  ],
+  "aliases": [
+   "fire tv",
+   "streaming",
+   "tv stick",
+   "amazon"
+  ],
+  "rank": 69,
+  "price": [
+   150,
+   400
+  ]
+ },
+ {
+  "id": "echo-dot-5th-gen",
+  "name": "Amazon Echo Dot (5th Gen)",
+  "category": "Electronics",
+  "query": "amazon echo dot 5th gen",
+  "must": [
+   "echo dot",
+   "5th"
+  ],
+  "mustNot": [
+   "case",
+   "cover",
+   "protector",
+   "screen guard",
+   "tempered",
+   "strap",
+   "band only",
+   "replacement",
+   "refurbished",
+   "renewed",
+   "used",
+   "skin",
+   "stand",
+   "clock",
+   "mount",
+   "holder"
+  ],
+  "aliases": [
+   "echo",
+   "alexa",
+   "smart speaker",
+   "amazon"
+  ],
+  "rank": 70,
+  "price": [
+   150,
+   400
+  ]
+ },
+ {
+  "id": "ps5-console",
+  "name": "Sony PlayStation 5 Console",
+  "category": "Electronics",
+  "query": "sony playstation 5 console",
+  "must": [
+   "playstation 5|ps5"
+  ],
+  "mustNot": [
+   "case",
+   "cover",
+   "protector",
+   "screen guard",
+   "tempered",
+   "strap",
+   "band only",
+   "replacement",
+   "refurbished",
+   "renewed",
+   "used",
+   "skin",
+   "stand",
+   "controller",
+   "dualsense",
+   "headset",
+   "game",
+   "charging",
+   "faceplate",
+   "cooling",
+   "dock",
+   "camera",
+   "remote",
+   "pulse"
+  ],
+  "aliases": [
+   "playstation",
+   "ps5",
+   "console",
+   "gaming",
+   "sony"
+  ],
+  "rank": 71,
+  "price": [
+   1500,
+   2800
+  ]
+ },
+ {
+  "id": "nintendo-switch-oled",
+  "name": "Nintendo Switch OLED Console",
+  "category": "Electronics",
+  "query": "nintendo switch oled console",
+  "must": [
+   "switch",
+   "oled",
+   "nintendo"
+  ],
+  "mustNot": [
+   "case",
+   "cover",
+   "protector",
+   "screen guard",
+   "tempered",
+   "strap",
+   "band only",
+   "replacement",
+   "refurbished",
+   "renewed",
+   "used",
+   "skin",
+   "stand",
+   "game",
+   "controller",
+   "dock",
+   "joy-con",
+   "joycon",
+   "grip",
+   "charger"
+  ],
+  "aliases": [
+   "nintendo",
+   "switch",
+   "console",
+   "gaming"
+  ],
+  "rank": 72,
+  "price": [
+   1000,
+   1800
+  ]
+ },
+ {
+  "id": "xbox-wireless-controller",
+  "name": "Xbox Wireless Controller",
+  "category": "Electronics",
+  "query": "xbox wireless controller",
+  "must": [
+   "xbox",
+   "controller",
+   "wireless"
+  ],
+  "mustNot": [
+   "case",
+   "cover",
+   "protector",
+   "screen guard",
+   "tempered",
+   "strap",
+   "band only",
+   "replacement",
+   "refurbished",
+   "renewed",
+   "used",
+   "skin",
+   "stand",
+   "charging",
+   "battery",
+   "elite",
+   "adapter",
+   "grip"
+  ],
+  "aliases": [
+   "xbox",
+   "controller",
+   "gamepad",
+   "gaming"
+  ],
+  "rank": 73,
+  "price": [
+   180,
+   400
+  ]
+ },
+ {
+  "id": "xiaomi-smart-band-8",
+  "name": "Xiaomi Smart Band 8",
+  "category": "Electronics",
+  "query": "xiaomi smart band 8",
+  "must": [
+   "xiaomi",
+   "band 8"
+  ],
+  "mustNot": [
+   "case",
+   "cover",
+   "protector",
+   "screen guard",
+   "tempered",
+   "strap",
+   "band only",
+   "replacement",
+   "refurbished",
+   "renewed",
+   "used",
+   "skin",
+   "stand",
+   "pro",
+   "active"
+  ],
+  "aliases": [
+   "fitness tracker",
+   "smart band",
+   "xiaomi",
+   "band"
+  ],
+  "rank": 74,
+  "price": [
+   100,
+   300
+  ]
+ },
+ {
+  "id": "tplink-archer-c6",
+  "name": "TP-Link Archer C6 AC1200 Wi-Fi Router",
+  "category": "Electronics",
+  "query": "tp-link archer c6 ac1200 router",
+  "must": [
+   "tp link",
+   "archer c6"
+  ],
+  "mustNot": [
+   "case",
+   "cover",
+   "protector",
+   "screen guard",
+   "tempered",
+   "strap",
+   "band only",
+   "replacement",
+   "refurbished",
+   "renewed",
+   "used",
+   "skin",
+   "stand",
+   "extender"
+  ],
+  "aliases": [
+   "router",
+   "wifi",
+   "wi-fi",
+   "tp-link",
+   "tplink",
+   "internet"
+  ],
+  "rank": 75,
+  "price": [
+   80,
+   200
+  ]
+ },
+ {
+  "id": "casio-f91w",
+  "name": "Casio F-91W Digital Watch",
+  "category": "Electronics",
+  "query": "casio f-91w digital watch",
+  "must": [
+   "casio",
+   "f 91w"
+  ],
+  "mustNot": [
+   "strap",
+   "band only",
+   "battery"
+  ],
+  "aliases": [
+   "watch",
+   "casio",
+   "digital watch"
+  ],
+  "rank": 76,
+  "price": [
+   30,
+   120
+  ]
+ },
+ {
+  "id": "philips-oneblade",
+  "name": "Philips OneBlade Hybrid Trimmer & Shaver",
+  "category": "Electronics",
+  "query": "philips oneblade trimmer shaver",
+  "must": [
+   "philips",
+   "oneblade"
+  ],
+  "mustNot": [
+   "blade only",
+   "replacement",
+   "blades",
+   "spare",
+   "head"
+  ],
+  "aliases": [
+   "shaver",
+   "trimmer",
+   "razor",
+   "philips"
+  ],
+  "rank": 77,
+  "price": [
+   100,
+   300
+  ]
+ }
+]

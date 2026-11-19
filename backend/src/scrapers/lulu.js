@@ -1,5 +1,5 @@
 import { RETAILERS } from './retailers.js';
-import { runBrowserScraper, pickBestMatch } from '../lib/scrape-helpers.js';
+import { runBrowserScraper, pickBestMatch, assertNotBlocked } from '../lib/scrape-helpers.js';
 import { makeProduct, absoluteUrl } from '../lib/normalize.js';
 
 const BASE = 'https://gcc.luluhypermarket.com';
@@ -10,7 +10,7 @@ const searchUrl = (q) => `${BASE}/en-ae/list/?search_text=${encodeURIComponent(q
  * platform, behind Cloudflare. Products render as server components; each card is
  * an <a href="/en-ae/<slug>/p/<id>/"> with a <span data-testid="product-price">.
  */
-export async function scrapeLulu(query) {
+export async function scrapeLulu(query, opts = {}) {
   return runBrowserScraper(
     RETAILERS.lulu,
     query,
@@ -27,6 +27,7 @@ export async function scrapeLulu(query) {
           .catch(() => null),
       ]).catch(() => null);
 
+      await assertNotBlocked(page, 'Lulu');
       if (outcome === 'empty') return { status: 'no_results', message: 'No matching products' };
 
       // Nudge lazy-loaded cards in.
@@ -78,7 +79,10 @@ export async function scrapeLulu(query) {
       });
 
       log.info(`parsed ${items.length} candidates`);
-      if (!items.length) return { status: 'no_results', message: 'No matching products' };
+      if (!items.length) {
+        await assertNotBlocked(page, 'Lulu');
+        return { status: 'no_results', message: 'No matching products' };
+      }
 
       const candidates = items.map((it) => ({
         name: it.name,
@@ -88,7 +92,7 @@ export async function scrapeLulu(query) {
         image: it.img,
       }));
 
-      const best = pickBestMatch(query, candidates);
+      const best = pickBestMatch(query, candidates, opts.constraints);
       if (!best) return { status: 'no_results', message: 'No priced products found' };
 
       return {

@@ -1,0 +1,144 @@
+name: Scrape prices and deploy site
+
+# Runs on a schedule (prices refresh every 6 hours), on demand, and whenever the
+# code changes on main. Pushes to other branches only scrape + report (no deploy).
+on:
+  push:
+    branches: [main, 'claude/**']
+  schedule:
+    - cron: '23 */6 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: site-${{ github.ref }}
+  cancel-in-progress: false
+
+env:
+  NODE_VERSION: 20
+
+jobs:
+  scrape:
+    name: Scrape shard ${{ matrix.shard }}
+    # Retailers block GitHub's datacenter IPs. To scrape from an unblocked network,
+    # register a self-hosted runner on an always-on machine at home and set the repo
+    # variable SCRAPER_RUNNER=self-hosted (Settings -> Variables -> Actions).
+    runs-on: ${{ vars.SCRAPER_RUNNER || 'ubuntu-latest' }}
+    timeout-minutes: 40
+    strategy:
+      fail-fast: false
+      matrix:
+        shard: [0, 1, 2, 3, 4]
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: npm
+          cache-dependency-path: backend/package-lock.json
+
+      - name: Install backend (use the runner's Google Chrome, skip the Chromium download)
+        working-directory: backend
+        env:
+          PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD: '1'
+        run: npm ci
+
+      - name: Make sure Xvfb is available (the scrapers need a real, headed Chrome)
+        if: runner.os == 'Linux'
+        run: command -v Xvfb || (sudo apt-get update -qq && sudo apt-get install -y -qq xvfb)
+
+      - name: Scrape
+        working-directory: backend
+        env:
+          PER_HOST_MIN_GAP_MS: '6000'
+          SCRAPER_TIMEOUT_MS: '30000'
+          BROWSER_CHANNEL: chrome
+        run: node scripts/scrape-catalog.js --shard ${{ matrix.shard }} --shards 5 --out ../out/shard-${{ matrix.shard }}.json
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: shard-${{ matrix.shard }}
+          path: out/shard-${{ matrix.shard }}.json
+          if-no-files-found: warn
+
+  merge:
+    name: Merge prices
+    needs: scrape
+    if: ${{ !cancelled() }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: shard-*
+          path: out
+          merge-multiple: true
+        continue-on-error: true
+
+      # Only the repo's own scripts + the retailer list are needed; no install.
+      - name: Merge (keeps the last good price when a retailer is temporarily blocked)
+        working-directory: backend
+        run: >
+          node scripts/merge-catalog.js
+          --shards-dir ../out
+          --previous "https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/data/prices.json"
+          --out ../site-data/prices.json
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: prices
+          path: site-data/prices.json
+
+  deploy:
+    name: Build and deploy to GitHub Pages
+    needs: merge
+    if: ${{ !cancelled() && needs.merge.result == 'success' && github.ref == 'refs/heads/main' }}
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+
+      - uses: actions/download-artifact@v4
+        with:
+          name: prices
+          path: site-data
+
+      - name: Build frontend
+        working-directory: frontend
+        env:
+          VITE_BASE: /${{ github.event.repository.name }}/
+          VITE_STATIC: '1'
+        run: |
+          npm ci
+          npm run build
+          mkdir -p dist/data
+          cp ../site-data/prices.json dist/data/prices.json
+          cp dist/index.html dist/404.html
+
+      - uses: actions/configure-pages@v5
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: frontend/dist
+
+      - id: deployment
+        uses: actions/deploy-pages@v4
