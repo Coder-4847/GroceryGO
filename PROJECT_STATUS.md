@@ -1,5 +1,28 @@
 # Project status — read this first if resuming
 
+## Where we left off (2026-11-20) — read this first
+
+**Live site:** https://coder-4847.github.io/GroceryGO/ (static GitHub Pages; search runs in the browser).
+
+**Works / verified**
+- Scrape -> merge -> deploy pipeline (`.github/workflows/site.yml`) runs end to end; 5 parallel shards every 6 h.
+- Site works on desktop, iPhone and Android (checked with Playwright); basket, autocomplete, alternatives, "Search <store>" links.
+- 78 pilot items in `catalog/items.json`, each pinned to an exact product (brand, size, exclusions, price range).
+
+**Not working: live prices.** From GitHub's cloud servers Carrefour returns 403, Lulu serves a Cloudflare block page, and Amazon.ae serves a CAPTCHA almost every time. Noon is deliberately link-only because its robots.txt disallows search (the robots check now fails closed). So the site currently shows mostly "Couldn't be checked" + a store search link.
+
+**Decided / not doing**
+- No stealth/anti-bot-evasion scraping (rotating residential IPs, CAPTCHA solving, etc.).
+- Free options with no affiliate programmes: only the home-runner test remains.
+
+**Next step (not done yet): the home-runner trial.** Follow `docs/SELF_HOSTED_RUNNER.md`: install GitHub's self-hosted runner on a home computer with Chrome, start it only while testing, then Actions -> "Scrape prices and deploy site" -> Run workflow -> runner = `self-hosted` (about 20-30 min). Then check which stores returned prices. If Carrefour/Lulu come through, tune the matching in `catalog/items.json` and grow the catalog. If still blocked, the remaining reliable routes are official partner/affiliate feeds or paid data.
+
+**Housekeeping**
+- A personal cloud environment named "GroceryGO" (allows the four retailer hosts) was created in the Claude account; delete it in settings if unwanted.
+- Scheduled workflows are disabled by GitHub after 60 days without repo activity.
+
+---
+
 > **Update 2026-11-19:** the repo is back on GitHub and the site is now a static
 > GitHub Pages app fed by a scheduled scrape (see the "Live site" section of
 > `README.md`). No backend host is needed for the public site. The text below is
