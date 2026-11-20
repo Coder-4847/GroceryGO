@@ -8,6 +8,12 @@ on:
   schedule:
     - cron: '23 */6 * * *'
   workflow_dispatch:
+    inputs:
+      runner:
+        description: 'Where to run the scraping (self-hosted = your own computer, which must have the GitHub runner app running)'
+        type: choice
+        options: [ubuntu-latest, self-hosted]
+        default: ubuntu-latest
 
 permissions:
   contents: read
@@ -25,9 +31,10 @@ jobs:
   scrape:
     name: Scrape shard ${{ matrix.shard }}
     # Retailers block GitHub's datacenter IPs. To scrape from an unblocked network,
-    # register a self-hosted runner on an always-on machine at home and set the repo
-    # variable SCRAPER_RUNNER=self-hosted (Settings -> Variables -> Actions).
-    runs-on: ${{ vars.SCRAPER_RUNNER || 'ubuntu-latest' }}
+    # register a self-hosted runner on a machine at home, then either pick
+    # "self-hosted" when you click "Run workflow", or set the repo variable
+    # SCRAPER_RUNNER=self-hosted to use it for every run (Settings -> Variables -> Actions).
+    runs-on: ${{ inputs.runner || vars.SCRAPER_RUNNER || 'ubuntu-latest' }}
     timeout-minutes: 40
     strategy:
       fail-fast: false
