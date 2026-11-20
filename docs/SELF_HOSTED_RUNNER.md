@@ -1,32 +1,40 @@
-# Getting live prices: run the scraper from your own network
+# Getting live prices: run the scraper from your own computer
 
-Carrefour, Lulu and Amazon.ae block GitHub's cloud servers (their IP ranges are
-known datacenters), so the scheduled job on GitHub's own runners comes back
-mostly empty. The same job works from an ordinary home or office internet
-connection. You do **not** need to install Node or anything else yourself: the
-workflow installs Node, and the only requirement is Google Chrome on that machine.
+Carrefour, Lulu and Amazon.ae block GitHub's cloud servers, so the automatic job
+on GitHub comes back mostly empty. The same job works from an ordinary home
+internet connection. You do **not** install Node or anything else: the workflow
+sets that up. You only need **Google Chrome** on the computer.
+
+You don't need to leave the computer on. Switch the runner on only while you
+start a refresh, then close it.
 
 ## One-time setup (about 10 minutes)
 
-Use any computer that is on during the day (Windows, macOS or Linux).
+1. Install **Google Chrome** if it isn't already there.
+2. GitHub repo -> **Settings -> Actions -> Runners -> New self-hosted runner**.
+   Pick your operating system and run the commands it shows, in order. The last
+   command (`./run.sh` on Mac/Linux, `.\run.cmd` on Windows) starts the runner.
+   When you see **"Listening for Jobs"** it is ready. Leave that window open.
+3. (Recommended) **Settings -> Actions -> General** -> under "Fork pull request
+   workflows from outside collaborators" choose **Require approval for all outside
+   collaborators**.
 
-1. Install **Google Chrome** on it if it isn't already.
-2. On GitHub open the repo, **Settings → Actions → Runners → New self-hosted
-   runner**, pick your operating system, and run the few commands it shows (they
-   download the runner and register it to your repo). Leave it running (or
-   install it as a service with the `svc` commands on that same page).
-3. **Settings → Secrets and variables → Actions → Variables → New repository
-   variable**:
-   - Name: `SCRAPER_RUNNER`
-   - Value: `self-hosted`
-4. **Actions → Scrape prices and deploy site → Run workflow.** In about 10 minutes
-   the site shows live prices. From then on it refreshes every 6 hours while the
-   machine is on and the runner is online (jobs wait up to 24 hours for it).
+## Every time you want fresh prices
 
-To go back to GitHub's servers, delete the `SCRAPER_RUNNER` variable.
+1. Start the runner (`./run.sh` or `.\run.cmd` in the runner folder). Wait for
+   "Listening for Jobs".
+2. GitHub -> **Actions -> Scrape prices and deploy site -> Run workflow**, set
+   **runner** to `self-hosted`, click the green button.
+3. Leave the computer on for about 20-30 minutes. Chrome windows open and close by
+   themselves; that is the scraper. The 5 parts run one after another on a single
+   computer.
+4. When the run turns green the site is updated. Close the runner window (Ctrl+C).
+
+The 6-hourly automatic run keeps using GitHub's servers (and mostly keeps the
+last good prices, shown as "older price", for up to 72 hours).
 
 ## Notes
-- Noon is intentionally link-only: its robots.txt disallows automated search, so
-  GroceryGO shows a "Search Noon" link instead of a price.
-- The deployed site never contains anything from your machine except the public
-  price data.
+- Noon is link-only: its robots.txt disallows automated search.
+- Only public price data is published; nothing else from your computer leaves it.
+- To remove everything later: Settings -> Actions -> Runners -> your runner ->
+  Remove, and delete the runner folder.
